@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    volumes:
+    - $PWD/app:/app
+    depends_on:
+    - database
+  database:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: database
+      MYSQL_PASSWORD: password
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_USER: username
+    volumes:
+    - $PWD/database:/var/lib/mysql
