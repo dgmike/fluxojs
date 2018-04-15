@@ -25,6 +25,7 @@
     "koa-router": "^7.4.0"
   },
   "devDependencies": {
-    "mocha": "^5.1.0"
+    "mocha": "^5.1.0",
+    "supertest": "^3.0.0"
   }
 }

@@ -12,4 +12,8 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-app.listen(3000);
+if (!module.parent) {
+  app.listen(3000);
+}
+
+module.exports = app;
