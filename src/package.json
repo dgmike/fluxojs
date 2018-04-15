@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/dgmike/fluxojs#readme",
   "dependencies": {
-    "koa": "^2.5.0"
+    "koa": "^2.5.0",
+    "koa-router": "^7.4.0"
   },
   "devDependencies": {
     "mocha": "^5.1.0"
