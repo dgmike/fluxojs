@@ -1,11 +1,14 @@
 const Koa = require('koa');
 const Router = require('koa-router');
+const views = require('koa-views');
 
 const app = new Koa();
 const router = new Router();
 
-router.get('/', (ctx, next) => {
-  ctx.body = 'Hello world!!!';
+app.use(views(`${__dirname}/views`, { extension: 'pug' }));
+
+router.get('/', async (ctx) => {
+  await ctx.render('index');
 });
 
 app

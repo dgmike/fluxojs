@@ -12,6 +12,7 @@ describe('fluxojs', () => {
       request
         .get('/')
         .expect(200)
+        .expect(/<h1>FluxoJs<\/h1>/)
         .end(done);
     });
   });
