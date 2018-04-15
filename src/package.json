@@ -1,0 +1,29 @@
+{
+  "name": "fluxojs",
+  "version": "0.0.0",
+  "description": "Fluxo de caixa",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dgmike/fluxojs.git"
+  },
+  "keywords": [
+    "finances"
+  ],
+  "author": "Michael Granados <michaelgranados@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dgmike/fluxojs/issues"
+  },
+  "homepage": "https://github.com/dgmike/fluxojs#readme",
+  "dependencies": {
+    "koa": "^2.5.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.1.0"
+  }
+}
