@@ -8,10 +8,12 @@ html
     h1 FluxoJs
 
     form(method='post' action='/login')
-      label E-mail
-      input(type='email' name='email' required=true)
+      label
+        span E-mail
+        input(type='email' name='email' required=true)
 
-      label Senha
-      input(type='password' name='password' required=true)
+      label
+        span Senha
+        input(type='password' name='password' required=true)
 
       button(type='submit') Entrar

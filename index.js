@@ -9,12 +9,12 @@ const router = new Router();
 app.use(views(`${__dirname}/views`, { extension: 'pug' }));
 app.use(static(`${__dirname}/static`));
 
-router.get('/', async (ctx) => {
+router.get('root', '/', async (ctx) => {
   await ctx.render('index');
 });
 
 router.post('/login', async (ctx) => {
-  ctx.redirect('/');
+  ctx.redirect(router.url('root'));
 });
 
 app
@@ -22,7 +22,11 @@ app
   .use(router.allowedMethods());
 
 if (!module.parent) {
-  app.listen(3000);
+  const port = process.env.PORT || '3000';
+
+  app.listen(port, () => {
+    console.log(`Running on http://localhost:${port}`);
+  });
 }
 
 module.exports = app;
