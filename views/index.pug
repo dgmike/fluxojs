@@ -7,10 +7,13 @@ html
   body
     h1 FluxoJs
 
+    if error
+      .warning= error
+
     form(method='post' action='/login')
       label
         span E-mail
-        input(type='email' name='email' required=true)
+        input(type='email' name='email' required=true value=email || '')
 
       label
         span Senha

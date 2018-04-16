@@ -26,26 +26,17 @@ describe('fluxojs', () => {
     it('should expect email field', (done) => {
       request
         .post('/login')
-        .field('email', '')
-        .field('password', '1234')
+        .send({ 'email': '', password: '1234' })
+        .expect(/Login inválido/)
         .expect(422, done);
     });
 
     it('should expect password field', (done) => {
       request
         .post('/login')
-        .field('email', 'michael@dgmike.com')
-        .field('password', '')
+        .send({ 'email': 'michael@dgmike.com.br', password: '' })
+        .expect(/Login inválido/)
         .expect(422, done);
-    });
-
-    it('should redirect to root', (done) => {
-      request
-        .post('/login')
-        .field('email', 'michael@dgmike.com')
-        .field('password', '1234')
-        .expect(302)
-        .expect('Location', '/', done);
     });
 
     it('should call user#valid method', (done) => {
@@ -54,8 +45,7 @@ describe('fluxojs', () => {
 
       request
         .post('/login')
-        .field('email', 'michael@dgmike.com')
-        .field('password', '1234')
+        .send({ 'email': 'michael@dgmike.com.br', password: '1234' })
         .end(() => {
           assert(stub.calledOnce);
           stub.restore();
@@ -74,21 +64,37 @@ describe('fluxojs', () => {
       after(() => { stub.restore(); });
 
       it('should create logged cookie');
-      it('should redirect user');
+
+      it('should redirect user', (done) => {
+        request
+          .post('/login')
+          .send({ 'email': 'michael@dgmike.com.br', password: '1234' })
+          .expect(302)
+          .expect('Location', '/')
+          .end(done);
+      });
     });
 
     context('with wrong access', () => {
       let stub;
 
-      before(() => {
+      beforeEach(() => {
         stub = sinon.stub(app.context.models.user, 'valid');
         stub.returns(false);
       });
 
-      after(() => { stub.restore(); });
+      afterEach(() => { stub.restore(); });
 
       it('should not create logged cookie');
-      it('should redirect user');
+
+      it('should not redirect user', (done) => {
+        request
+          .post('/login')
+          .send({ 'email': 'michael@dgmike.com.br', password: '1234' })
+          .expect(/Login inválido/)
+          .expect(401)
+          .end(done);
+      });
     });
   });
 });
