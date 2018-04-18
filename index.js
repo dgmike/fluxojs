@@ -1,7 +1,7 @@
 const Koa = require('koa');
 const Router = require('koa-router');
 const views = require('koa-views');
-const static = require('koa-static');
+const koaStatic = require('koa-static');
 const koaBody = require('koa-body');
 const session = require('koa-session');
 
@@ -27,7 +27,7 @@ const SESSION_CONFIG = {
 
 app.use(koaBody());
 app.use(views(`${__dirname}/views`, { extension: 'pug' }));
-app.use(static(`${__dirname}/static`));
+app.use(koaStatic(`${__dirname}/static`));
 app.use(session(SESSION_CONFIG, app));
 
 app.context.models = models;
