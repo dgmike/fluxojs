@@ -151,12 +151,12 @@ describe('fluxojs', () => {
   });
 
   describe('GET /dashboard', () => {
-    context('when user is NOT logged', () => {
+    context('when user is NOT logged on system', () => {
       it('should redirect to homepage', (done) => {
         request
           .get('/dashboard')
-          .expect(302)
           .expect('Location', '/')
+          .expect(302)
           .end(done);
       });
     });
@@ -223,17 +223,6 @@ describe('fluxojs', () => {
           .get('/logout')
           .expect('Location', '/')
           .expect(302)
-          .end(done);
-      });
-
-      it.skip('should clear cookies', (done) => {
-        request
-          .get('/logout')
-          .expect((res) => {
-            if (res.headers['set-cookie']) {
-              throw new Error('"set-cookie" header exists in response: ' + JSON.stringify(res.headers));
-            }
-          })
           .end(done);
       });
     });
