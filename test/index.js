@@ -150,7 +150,7 @@ describe('fluxojs', () => {
     });
   });
 
-  describe('GET /dashboard', (done) => {
+  describe('GET /dashboard', () => {
     context('when user is NOT logged', () => {
       it('should redirect to homepage', (done) => {
         request
@@ -183,7 +183,7 @@ describe('fluxojs', () => {
     });
   });
 
-  describe('GET /logout', (done) => {
+  describe('GET /logout', () => {
     context('when user is NOT logged', () => {
       it('should redirect to homepage', (done) => {
         request
@@ -218,11 +218,11 @@ describe('fluxojs', () => {
 
       afterEach(() => { stub.restore(); });
 
-      it('should redirect to homepage', (done) => {
+      it('should redirect to root', (done) => {
         request
           .get('/logout')
-          .expect(302)
           .expect('Location', '/')
+          .expect(302)
           .end(done);
       });
 
