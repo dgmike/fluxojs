@@ -21,8 +21,11 @@ const SESSION_CONFIG = {
   overwrite: true, /** (boolean) can overwrite or not (default true) */
   httpOnly: true, /** (boolean) httpOnly or not (default true) */
   signed: true, /** (boolean) signed or not (default true) */
-  rolling: false, /** (boolean) Force a session identifier cookie to be set on every response. The expiration is reset to the original maxAge, resetting the expiration countdown. (default is false) */
-  renew: false, /** (boolean) renew session when session is nearly expired, so we can always keep user logged in. (default is false)*/
+  rolling: false, /** (boolean) Force a session identifier cookie to be set on every
+                      response. The expiration is reset to the original maxAge, resetting
+                      the expiration countdown. (default is false) */
+  renew: false, /** (boolean) renew session when session is nearly expired, so we can
+                    always keep user logged in. (default is false) */
 };
 
 app.use(koaBody());
@@ -41,8 +44,7 @@ router.get('root', '/', async (ctx) => {
 });
 
 router.post('/login', async (ctx) => {
-  const email = ctx.request.body.email;
-  const password = ctx.request.body.password;
+  const { email, password } = ctx.request.body;
 
   if (!email || !password) {
     ctx.status = 422;

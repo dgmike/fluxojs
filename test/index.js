@@ -1,3 +1,4 @@
+/* eslint-env mocha */
 const supertest = require('supertest');
 const sinon = require('sinon');
 const assert = require('assert');
@@ -32,6 +33,8 @@ describe('fluxojs', () => {
     });
 
     context('when user is logged', () => {
+      let stub;
+
       beforeEach(() => {
         stub = sinon.stub(app.context.models.user, 'valid');
         stub.returns(true);
@@ -48,7 +51,7 @@ describe('fluxojs', () => {
               return done(err);
             }
 
-            request
+            return request
               .get('/')
               .expect(302)
               .expect('Location', '/dashboard')
@@ -86,7 +89,7 @@ describe('fluxojs', () => {
           assert(stub.calledOnce);
           stub.restore();
           done();
-        })
+        });
     });
 
     context('with right access', () => {
@@ -132,9 +135,9 @@ describe('fluxojs', () => {
           .post('/login')
           .send({ email: 'michael@dgmike.com.br', password: '1234' })
           .expect((res) => {
-              if (res.headers['set-cookie']) {
-                throw new Error('"set-cookie" header exists in response');
-              }
+            if (res.headers['set-cookie']) {
+              throw new Error('"set-cookie" header exists in response');
+            }
           })
           .end(done);
       });
@@ -162,6 +165,8 @@ describe('fluxojs', () => {
     });
 
     context('when user is logged on system', () => {
+      let stub;
+
       beforeEach((done) => {
         stub = sinon.stub(app.context.models.user, 'valid');
         stub.returns(true);
@@ -198,7 +203,7 @@ describe('fluxojs', () => {
           .get('/logout')
           .expect((res) => {
             if (res.headers['set-cookie']) {
-              throw new Error('"set-cookie" header exists in response: ' + JSON.stringify(res.headers));
+              throw new Error(`"set-cookie" header exists in response: ${JSON.stringify(res.headers)}`);
             }
           })
           .end(done);
@@ -206,6 +211,8 @@ describe('fluxojs', () => {
     });
 
     context('when user is logged', () => {
+      let stub;
+
       beforeEach((done) => {
         stub = sinon.stub(app.context.models.user, 'valid');
         stub.returns(true);
