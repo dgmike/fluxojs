@@ -1,68 +1,106 @@
 body {
     font-family: Roboto, sans-serif;
-    font-size: 0.8rem;
+    font-size: .87rem;
+    color: #444;
+    padding: 2.5rem 0 0;
+    margin: 0;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-    font-size: .8rem;
-    margin-top: 1rem;
-}
-
-table thead th:first-child {
-    border-radius: 7px 0 0 0;
-}
-
-table thead th:last-child {
-    border-radius: 0 7px 0 0;
-}
-
-table tfoot th:first-child {
-    border-radius: 0 0 0 7px;
-}
-
-table tfoot th:last-child {
-    border-radius: 0 0 7px 0;
-}
-
-table tbody td, table th, table tr {
-    padding: .3rem;
-}
-
-table tbody td, table tbody th {
-    border: 1px solid #ccc;
-}
-
-table thead th,
-table thead td,
-table tfoot th,
-table tfoot td {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cfe7fa+0,6393c1+100;Grey+Blue+3D */
-    background: #cfe7fa; /* Old browsers */
-    background: -moz-linear-gradient(top, #cfe7fa 0%, #6393c1 100%); /* FF3.6-15 */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cfe7fa), color-stop(100%, #6393c1)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #cfe7fa 0%,#6393c1 100%); /* Chrome10-25,Safari5.1-6 */
-    background: -o-linear-gradient(top, #cfe7fa 0%, #6393c1 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #cfe7fa 0%, #6393c1 100%); /* IE10+ */
-    background: linear-gradient(to bottom, #cfe7fa 0%,#6393c1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfe7fa', endColorstr='#6393c1',GradientType=0 ); /* IE6-9 */
-
-    color: #333;
-    font-weight: 600;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-}
-
-table .subhead {
-    background: #ddf;
-}
-
-table .text-center {
+.text-center {
     text-align: center;
 }
 
-table tbody tr:nth-child(odd) {
-    background: #ffffee;
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 5px 0 rgba(20, 20, 20, .5);
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fafafa+0,eeeeee+100;Grey+Blue+3D */
+    background: #f8f8f8; /* Old browsers */
+    background: -moz-linear-gradient(top, #fafafa 0%, #eeeeee 100%); /* FF3.6-15 */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fafafa), color-stop(100%, #eeeeee)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #fafafa 0%,#eeeeee 100%); /* Chrome10-25,Safari5.1-6 */
+    background: -o-linear-gradient(top, #fafafa 0%, #eeeeee 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #fafafa 0%, #eeeeee 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #fafafa 0%,#eeeeee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+}
+
+header nav a {
+    padding: 15px;
+    text-decoration: none;
+    color: #333;
+    display: inline-block;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #ddd;
+    text-align: center;
+}
+
+header nav a:hover {
+    text-shadow: 0 0 2px #ccc;
+    padding-top: 16px;
+    padding-bottom: 14px;
+}
+
+header nav a:first-of-type {
+    border-left: 0;
+}
+
+header nav a:last-of-type {
+    border-right: 0;
+}
+
+header nav a.currentmonth {
+    min-width: 5rem;
+}
+
+main {
+    margin-top: 1rem;
+    width: 100%;
+    margin: 15px;
+    box-sizing: border-box;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.8rem;
+    box-sizing: border-box;
+}
+
+table th,
+table td {
+    padding: 5px;
+}
+
+table thead th {
+    border-bottom: 2px solid #ccc;
+}
+
+table tbody th,
+table tbody td {
+    border-bottom: 1px solid #ccc;
+}
+
+table tfoot th,
+table tfoot td {
+    border-top: 2px solid #ccc;
 }
