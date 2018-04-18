@@ -4,9 +4,11 @@ const assert = require('assert');
 const app = require('../index');
 
 const server = app.listen();
-const request = supertest.agent(server);
+
+let request = supertest.agent(server).get('/').end(() => {});
 
 describe('fluxojs', () => {
+  beforeEach(() => { request = supertest.agent(server); });
   after(() => server.close());
 
   describe('GET /', () => {
@@ -14,10 +16,16 @@ describe('fluxojs', () => {
       request
         .get('/')
         .expect(200)
+        .end(done);
+    });
+
+    it('should render a form', (done) => {
+      request
+        .get('/')
         .expect(/<h1>FluxoJs<\/h1>/)
-        .expect(/<form/)
-        .expect(/name="email"/)
-        .expect(/name="password"/)
+        .expect(/<form /)
+        .expect(/ name="email"/)
+        .expect(/ name="password"/)
         .end(done);
     });
   });
@@ -26,7 +34,7 @@ describe('fluxojs', () => {
     it('should expect email field', (done) => {
       request
         .post('/login')
-        .send({ 'email': '', password: '1234' })
+        .send({ email: '', password: '1234' })
         .expect(/Login inválido/)
         .expect(422, done);
     });
@@ -34,7 +42,7 @@ describe('fluxojs', () => {
     it('should expect password field', (done) => {
       request
         .post('/login')
-        .send({ 'email': 'michael@dgmike.com.br', password: '' })
+        .send({ email: 'michael@dgmike.com.br', password: '' })
         .expect(/Login inválido/)
         .expect(422, done);
     });
@@ -45,7 +53,7 @@ describe('fluxojs', () => {
 
       request
         .post('/login')
-        .send({ 'email': 'michael@dgmike.com.br', password: '1234' })
+        .send({ email: 'michael@dgmike.com.br', password: '1234' })
         .end(() => {
           assert(stub.calledOnce);
           stub.restore();
@@ -63,12 +71,18 @@ describe('fluxojs', () => {
 
       after(() => { stub.restore(); });
 
-      it('should create logged cookie');
+      it('should create logged cookie', (done) => {
+        request
+          .post('/login')
+          .send({ email: 'michael@dgmike.com.br', password: '1234' })
+          .expect('set-cookie', /fluxojs:sess/)
+          .end(done);
+      });
 
       it('should redirect user', (done) => {
         request
           .post('/login')
-          .send({ 'email': 'michael@dgmike.com.br', password: '1234' })
+          .send({ email: 'michael@dgmike.com.br', password: '1234' })
           .expect(302)
           .expect('Location', '/')
           .end(done);
@@ -85,12 +99,22 @@ describe('fluxojs', () => {
 
       afterEach(() => { stub.restore(); });
 
-      it('should not create logged cookie');
+      it('should not create logged cookie', (done) => {
+        request
+          .post('/login')
+          .send({ email: 'michael@dgmike.com.br', password: '1234' })
+          .expect((res) => {
+              if (res.headers['set-cookie']) {
+                throw new Error('"set-cookie" header exists in response');
+              }
+          })
+          .end(done);
+      });
 
       it('should not redirect user', (done) => {
         request
           .post('/login')
-          .send({ 'email': 'michael@dgmike.com.br', password: '1234' })
+          .send({ email: 'michael@dgmike.com.br', password: '1234' })
           .expect(/Login inválido/)
           .expect(401)
           .end(done);

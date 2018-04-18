@@ -55,6 +55,7 @@ router.post('/login', async (ctx) => {
   }
 
   ctx.session.logged = true;
+  ctx.session.email = email;
   ctx.redirect(router.url('root'));
 });
 
