@@ -34,7 +34,7 @@ app.context.models = models;
 
 router.get('root', '/', async (ctx) => {
   if (ctx.session.logged) {
-    ctx.redirect('/dashboard');
+    ctx.redirect(router.url('dashboard'));
     return;
   }
   await ctx.render('index');
@@ -60,6 +60,19 @@ router.post('/login', async (ctx) => {
 
   ctx.session.logged = true;
   ctx.session.email = email;
+  ctx.redirect(router.url('root'));
+});
+
+router.get('dashboard', '/dashboard', async (ctx) => {
+  if (!ctx.session.logged) {
+    return ctx.redirect(router.url('root'));
+  }
+
+  ctx.body = `<a href="${router.url('logout')}">logout</a>`;
+});
+
+router.get('logout', '/logout', async (ctx) => {
+  this.session = null;
   ctx.redirect(router.url('root'));
 });
 

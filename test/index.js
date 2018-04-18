@@ -39,7 +39,7 @@ describe('fluxojs', () => {
 
       afterEach(() => { stub.restore(); });
 
-      it('must redirect to /dashboard', (done) => {
+      it('should redirect to /dashboard', (done) => {
         request
           .post('/login')
           .send({ email: 'michael@dgmike.com.br', password: '1234' })
@@ -145,6 +145,95 @@ describe('fluxojs', () => {
           .send({ email: 'michael@dgmike.com.br', password: '1234' })
           .expect(/Login inválido/)
           .expect(401)
+          .end(done);
+      });
+    });
+  });
+
+  describe('GET /dashboard', (done) => {
+    context('when user is NOT logged', () => {
+      it('should redirect to homepage', (done) => {
+        request
+          .get('/dashboard')
+          .expect(302)
+          .expect('Location', '/')
+          .end(done);
+      });
+    });
+
+    context('when user is logged', () => {
+      beforeEach((done) => {
+        stub = sinon.stub(app.context.models.user, 'valid');
+        stub.returns(true);
+
+        request
+          .post('/login')
+          .send({ email: 'michael@dgmike.com.br', password: '1234' })
+          .end(done);
+      });
+
+      afterEach(() => { stub.restore(); });
+
+      it('should have logout link', (done) => {
+        request
+          .get('/dashboard')
+          .expect(/href="\/logout"/)
+          .end(done);
+      });
+    });
+  });
+
+  describe('GET /logout', (done) => {
+    context('when user is NOT logged', () => {
+      it('should redirect to homepage', (done) => {
+        request
+          .get('/logout')
+          .expect(302)
+          .expect('Location', '/')
+          .end(done);
+      });
+
+      it('should clear cookies', (done) => {
+        request
+          .get('/logout')
+          .expect((res) => {
+            if (res.headers['set-cookie']) {
+              throw new Error('"set-cookie" header exists in response: ' + JSON.stringify(res.headers));
+            }
+          })
+          .end(done);
+      });
+    });
+
+    context('when user is logged', () => {
+      beforeEach((done) => {
+        stub = sinon.stub(app.context.models.user, 'valid');
+        stub.returns(true);
+
+        request
+          .post('/login')
+          .send({ email: 'michael@dgmike.com.br', password: '1234' })
+          .end(done);
+      });
+
+      afterEach(() => { stub.restore(); });
+
+      it('should redirect to homepage', (done) => {
+        request
+          .get('/logout')
+          .expect(302)
+          .expect('Location', '/')
+          .end(done);
+      });
+
+      it('should clear cookies', (done) => {
+        request
+          .get('/logout')
+          .expect((res) => {
+            if (res.headers['set-cookie']) {
+              throw new Error('"set-cookie" header exists in response: ' + JSON.stringify(res.headers));
+            }
+          })
           .end(done);
       });
     });
