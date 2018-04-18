@@ -161,7 +161,7 @@ describe('fluxojs', () => {
       });
     });
 
-    context('when user is logged', () => {
+    context('when user is logged on system', () => {
       beforeEach((done) => {
         stub = sinon.stub(app.context.models.user, 'valid');
         stub.returns(true);
