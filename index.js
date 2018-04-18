@@ -82,6 +82,7 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
+/* istanbul ignore if */
 if (!module.parent) {
   const port = process.env.PORT || '3000';
 
