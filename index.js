@@ -1,21 +1,21 @@
-const Koa = require('koa');
-const Router = require('koa-router');
-const views = require('koa-views');
-const koaStatic = require('koa-static');
-const koaBody = require('koa-body');
-const session = require('koa-session');
+const Koa = require("koa");
+const Router = require("koa-router");
+const views = require("koa-views");
+const koaStatic = require("koa-static");
+const koaBody = require("koa-body");
+const session = require("koa-session");
 
-const models = require('./models');
+const models = require("./models");
 
 const app = new Koa();
 const router = new Router();
 
-app.keys = (process.env.SECRET_KEYS || 'some secret key').split(',');
+app.keys = (process.env.SECRET_KEYS || "some secret key").split(",");
 
 const SESSION_CONFIG = {
-  key: 'fluxojs:sess', /** (string) cookie key (default is koa:sess) */
-  /** (number || 'session') maxAge in ms (default is 1 days) */
-  /** 'session' will result in a cookie that expires when session/browser is closed */
+  key: "fluxojs:sess", /** (string) cookie key (default is koa:sess) */
+  /** (number || "session") maxAge in ms (default is 1 days) */
+  /** "session" will result in a cookie that expires when session/browser is closed */
   /** Warning: If a session cookie is stolen, this cookie will never expire */
   maxAge: 86400000,
   overwrite: true, /** (boolean) can overwrite or not (default true) */
@@ -29,26 +29,26 @@ const SESSION_CONFIG = {
 };
 
 app.use(koaBody());
-app.use(views(`${__dirname}/views`, { extension: 'pug' }));
+app.use(views(`${__dirname}/views`, { extension: "pug" }));
 app.use(koaStatic(`${__dirname}/static`));
 app.use(session(SESSION_CONFIG, app));
 
 app.context.models = models;
 
-router.get('root', '/', async (ctx) => {
+router.get("root", "/", async (ctx) => {
   if (ctx.session.logged) {
-    ctx.redirect(router.url('dashboard'));
+    ctx.redirect(router.url("dashboard"));
     return;
   }
-  await ctx.render('index');
+  await ctx.render("index");
 });
 
-router.post('/login', async (ctx) => {
+router.post("/login", async (ctx) => {
   const { email, password } = ctx.request.body;
 
   if (!email || !password) {
     ctx.status = 422;
-    await ctx.render('index', { email, password, error: 'Login inválido' });
+    await ctx.render("index", { email, password, error: "Login inválido" });
     return;
   }
 
@@ -56,26 +56,26 @@ router.post('/login', async (ctx) => {
 
   if (!valid) {
     ctx.status = 401;
-    await ctx.render('index', { email, password, error: 'Login inválido' });
+    await ctx.render("index", { email, password, error: "Login inválido" });
     return;
   }
 
   ctx.session.logged = true;
   ctx.session.email = email;
-  ctx.redirect(router.url('root'));
+  ctx.redirect(router.url("root"));
 });
 
-router.get('dashboard', '/dashboard', async (ctx) => {
+router.get("dashboard", "/dashboard", async (ctx) => {
   if (!ctx.session.logged) {
-    return ctx.redirect(router.url('root'));
+    return ctx.redirect(router.url("root"));
   }
 
-  return ctx.render('dashboard', { router });
+  return ctx.render("dashboard", { router });
 });
 
-router.get('logout', '/logout', async (ctx) => {
+router.get("logout", "/logout", async (ctx) => {
   ctx.session = null;
-  ctx.redirect(router.url('root'));
+  ctx.redirect(router.url("root"));
 });
 
 app
@@ -84,7 +84,7 @@ app
 
 /* istanbul ignore if */
 if (!module.parent) {
-  const port = process.env.PORT || '3000';
+  const port = process.env.PORT || "3000";
 
   app.listen(port, () => {
     process.stdout.write(`Running on http://localhost:${port}\n`);
