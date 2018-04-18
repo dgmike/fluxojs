@@ -155,7 +155,7 @@ describe('fluxojs', () => {
       it('should redirect to homepage', (done) => {
         request
           .get('/dashboard')
-          .expect('Location', '/')
+          .expect('location', '/')
           .expect(302)
           .end(done);
       });
