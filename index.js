@@ -68,11 +68,11 @@ router.get('dashboard', '/dashboard', async (ctx) => {
     return ctx.redirect(router.url('root'));
   }
 
-  ctx.body = `<a href="${router.url('logout')}">logout</a>`;
+  return ctx.render('dashboard', { router });
 });
 
 router.get('logout', '/logout', async (ctx) => {
-  this.session = null;
+  ctx.session = null;
   ctx.redirect(router.url('root'));
 });
 

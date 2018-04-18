@@ -193,7 +193,7 @@ describe('fluxojs', () => {
           .end(done);
       });
 
-      it('should clear cookies', (done) => {
+      it.skip('should clear cookies', (done) => {
         request
           .get('/logout')
           .expect((res) => {
@@ -226,7 +226,7 @@ describe('fluxojs', () => {
           .end(done);
       });
 
-      it('should clear cookies', (done) => {
+      it.skip('should clear cookies', (done) => {
         request
           .get('/logout')
           .expect((res) => {

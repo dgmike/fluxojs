@@ -1,0 +1,73 @@
+doctype html5
+
+html
+  head
+    meta(charset='utf-8')
+    title FluxoJs
+    link(rel='stylesheet' href='/css/dashboard.css')
+
+  body
+    header
+      h1 FluxoJs
+
+      nav
+        a(href="#") &larr;
+        a(href="#") Abril
+        a(href="#") &rarr;
+
+        a(href="#") Clonar
+        a(href="#") Configurar
+        a(href=router.url('logout')) Sair
+
+    table
+      thead
+        tr
+          th Dia
+          th Descrição
+          th Estimativa
+          th Valor Real
+          th Status
+          th Ações
+      tfoot
+        tr
+          th(colspan=2) Somatória
+          th.text-center R$ 400,00
+          th.text-center R$ 123,00
+          th
+          th
+      tbody
+        tr
+          th.subhead(colspan=6) Entradas
+        tr
+          td 1
+          td Salário
+          td.text-center R$ 1200,00
+          td.text-center R$ 1000,00
+          td.text-center Já aconteceu
+          td.text-center
+            a(href="#") editar
+            | &nbsp;
+            a(href="#") remover
+      tbody
+      tr
+        th.subhead(colspan=6) Saidas
+        tr
+          td 12
+          td Aluguel
+          td.text-center R$ 120,00
+          td.text-center R$ 123,00
+          td.text-center Já aconteceu
+          td.text-center
+            a(href="#") editar
+            | &nbsp;
+            a(href="#") remover
+        tr
+          td 21
+          td Consórcio
+          td.text-center R$ 300,00
+          td.text-center -
+          td.text-center Vai acontecer
+          td.text-center
+            a(href="#") editar
+            | &nbsp;
+            a(href="#") remover

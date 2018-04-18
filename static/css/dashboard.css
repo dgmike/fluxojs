@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+    font-family: Roboto, sans-serif;
+    font-size: 0.8rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: .8rem;
+    margin-top: 1rem;
+}
+
+table thead th:first-child {
+    border-radius: 7px 0 0 0;
+}
+
+table thead th:last-child {
+    border-radius: 0 7px 0 0;
+}
+
+table tfoot th:first-child {
+    border-radius: 0 0 0 7px;
+}
+
+table tfoot th:last-child {
+    border-radius: 0 0 7px 0;
+}
+
+table tbody td, table th, table tr {
+    padding: .3rem;
+}
+
+table tbody td, table tbody th {
+    border: 1px solid #ccc;
+}
+
+table thead th,
+table thead td,
+table tfoot th,
+table tfoot td {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cfe7fa+0,6393c1+100;Grey+Blue+3D */
+    background: #cfe7fa; /* Old browsers */
+    background: -moz-linear-gradient(top, #cfe7fa 0%, #6393c1 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #cfe7fa 0%,#6393c1 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #cfe7fa 0%,#6393c1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfe7fa', endColorstr='#6393c1',GradientType=0 ); /* IE6-9 */
+
+    color: #333;
+    font-weight: 600;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+table .subhead {
+    background: #ddf;
+}
+
+table .text-center {
+    text-align: center;
+}
+
+table tbody tr:nth-child(odd) {
+    background: #ffffee;
+}
