@@ -33,6 +33,10 @@ app.use(session(SESSION_CONFIG, app));
 app.context.models = models;
 
 router.get('root', '/', async (ctx) => {
+  if (ctx.session.logged) {
+    ctx.redirect('/dashboard');
+    return;
+  }
   await ctx.render('index');
 });
 

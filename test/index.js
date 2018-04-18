@@ -12,21 +12,49 @@ describe('fluxojs', () => {
   after(() => server.close());
 
   describe('GET /', () => {
-    it('should respond with OK', (done) => {
-      request
-        .get('/')
-        .expect(200)
-        .end(done);
+    context('when user is NOT logged', () => {
+      it('should respond with OK', (done) => {
+        request
+          .get('/')
+          .expect(200)
+          .end(done);
+      });
+
+      it('should render a form', (done) => {
+        request
+          .get('/')
+          .expect(/<h1>FluxoJs<\/h1>/)
+          .expect(/<form /)
+          .expect(/ name="email"/)
+          .expect(/ name="password"/)
+          .end(done);
+      });
     });
 
-    it('should render a form', (done) => {
-      request
-        .get('/')
-        .expect(/<h1>FluxoJs<\/h1>/)
-        .expect(/<form /)
-        .expect(/ name="email"/)
-        .expect(/ name="password"/)
-        .end(done);
+    context('when user is logged', () => {
+      beforeEach(() => {
+        stub = sinon.stub(app.context.models.user, 'valid');
+        stub.returns(true);
+      });
+
+      afterEach(() => { stub.restore(); });
+
+      it('must redirect to /dashboard', (done) => {
+        request
+          .post('/login')
+          .send({ email: 'michael@dgmike.com.br', password: '1234' })
+          .end((err) => {
+            if (err) {
+              return done(err);
+            }
+
+            request
+              .get('/')
+              .expect(302)
+              .expect('Location', '/dashboard')
+              .end(done);
+          });
+      });
     });
   });
 
