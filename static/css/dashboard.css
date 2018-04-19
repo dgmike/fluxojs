@@ -81,7 +81,6 @@ table {
     border-collapse: collapse;
     width: 100%;
     font-size: 0.8rem;
-    box-sizing: border-box;
 }
 
 table th,
