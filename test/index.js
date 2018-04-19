@@ -1,29 +1,29 @@
 /* eslint-env mocha */
-const supertest = require("supertest");
-const sinon = require("sinon");
-const assert = require("assert");
-const app = require("../index");
+const supertest = require('supertest');
+const sinon = require('sinon');
+const assert = require('assert');
+const app = require('../index');
 
 const server = app.listen();
 
-let request = supertest.agent(server).get("/").end(() => {});
+let request = supertest.agent(server).get('/').end(() => {});
 
-describe("fluxojs", () => {
+describe('fluxojs', () => {
   beforeEach(() => { request = supertest.agent(server); });
   after(() => server.close());
 
-  describe("GET /", () => {
-    context("when user is NOT logged", () => {
-      it("should respond with OK", (done) => {
+  describe('GET /', () => {
+    context('when user is NOT logged', () => {
+      it('should respond with OK', (done) => {
         request
-          .get("/")
+          .get('/')
           .expect(200)
           .end(done);
       });
 
-      it("should render a form", (done) => {
+      it('should render a form', (done) => {
         request
-          .get("/")
+          .get('/')
           .expect(/<h1>FluxoJs<\/h1>/)
           .expect(/<form /)
           .expect(/ name="email"/)
@@ -32,59 +32,59 @@ describe("fluxojs", () => {
       });
     });
 
-    context("when user is logged", () => {
+    context('when user is logged', () => {
       let stub;
 
       beforeEach(() => {
-        stub = sinon.stub(app.context.models.user, "valid");
+        stub = sinon.stub(app.context.models.user, 'valid');
         stub.returns(true);
       });
 
       afterEach(() => { stub.restore(); });
 
-      it("should redirect to /dashboard", (done) => {
+      it('should redirect to /dashboard', (done) => {
         request
-          .post("/login")
-          .send({ email: "michael@dgmike.com.br", password: "1234" })
+          .post('/login')
+          .send({ email: 'michael@dgmike.com.br', password: '1234' })
           .end((err) => {
             if (err) {
               return done(err);
             }
 
             return request
-              .get("/")
+              .get('/')
               .expect(302)
-              .expect("Location", "/dashboard")
+              .expect('Location', '/dashboard')
               .end(done);
           });
       });
     });
   });
 
-  describe("POST /login", () => {
-    it("should expect email field", (done) => {
+  describe('POST /login', () => {
+    it('should expect email field', (done) => {
       request
-        .post("/login")
-        .send({ email: "", password: "1234" })
+        .post('/login')
+        .send({ email: '', password: '1234' })
         .expect(/Login inválido/)
         .expect(422, done);
     });
 
-    it("should expect password field", (done) => {
+    it('should expect password field', (done) => {
       request
-        .post("/login")
-        .send({ email: "michael@dgmike.com.br", password: "" })
+        .post('/login')
+        .send({ email: 'michael@dgmike.com.br', password: '' })
         .expect(/Login inválido/)
         .expect(422, done);
     });
 
-    it("should call user#valid method", (done) => {
-      const stub = sinon.stub(app.context.models.user, "valid");
+    it('should call user#valid method', (done) => {
+      const stub = sinon.stub(app.context.models.user, 'valid');
       stub.returns(true);
 
       request
-        .post("/login")
-        .send({ email: "michael@dgmike.com.br", password: "1234" })
+        .post('/login')
+        .send({ email: 'michael@dgmike.com.br', password: '1234' })
         .end(() => {
           assert(stub.calledOnce);
           stub.restore();
@@ -92,60 +92,60 @@ describe("fluxojs", () => {
         });
     });
 
-    context("with right access", () => {
+    context('with right access', () => {
       let stub;
 
       before(() => {
-        stub = sinon.stub(app.context.models.user, "valid");
+        stub = sinon.stub(app.context.models.user, 'valid');
         stub.returns(true);
       });
 
       after(() => { stub.restore(); });
 
-      it("should create logged cookie", (done) => {
+      it('should create logged cookie', (done) => {
         request
-          .post("/login")
-          .send({ email: "michael@dgmike.com.br", password: "1234" })
-          .expect("set-cookie", /fluxojs:sess/)
+          .post('/login')
+          .send({ email: 'michael@dgmike.com.br', password: '1234' })
+          .expect('set-cookie', /fluxojs:sess/)
           .end(done);
       });
 
-      it("should redirect user", (done) => {
+      it('should redirect user', (done) => {
         request
-          .post("/login")
-          .send({ email: "michael@dgmike.com.br", password: "1234" })
+          .post('/login')
+          .send({ email: 'michael@dgmike.com.br', password: '1234' })
           .expect(302)
-          .expect("Location", "/")
+          .expect('Location', '/')
           .end(done);
       });
     });
 
-    context("with wrong access", () => {
+    context('with wrong access', () => {
       let stub;
 
       beforeEach(() => {
-        stub = sinon.stub(app.context.models.user, "valid");
+        stub = sinon.stub(app.context.models.user, 'valid');
         stub.returns(false);
       });
 
       afterEach(() => { stub.restore(); });
 
-      it("should not create logged cookie", (done) => {
+      it('should not create logged cookie', (done) => {
         request
-          .post("/login")
-          .send({ email: "michael@dgmike.com.br", password: "1234" })
+          .post('/login')
+          .send({ email: 'michael@dgmike.com.br', password: '1234' })
           .expect((res) => {
-            if (res.headers["set-cookie"]) {
+            if (res.headers['set-cookie']) {
               throw new Error("'set-cookie' header exists in response");
             }
           })
           .end(done);
       });
 
-      it("should not redirect user", (done) => {
+      it('should not redirect user', (done) => {
         request
-          .post("/login")
-          .send({ email: "michael@dgmike.com.br", password: "1234" })
+          .post('/login')
+          .send({ email: 'michael@dgmike.com.br', password: '1234' })
           .expect(/Login inválido/)
           .expect(401)
           .end(done);
@@ -153,56 +153,56 @@ describe("fluxojs", () => {
     });
   });
 
-  describe("GET /dashboard", () => {
-    context("when user is NOT logged on system", () => {
-      it("should redirect to homepage", (done) => {
+  describe('GET /dashboard', () => {
+    context('when user is NOT logged on system', () => {
+      it('should redirect to homepage', (done) => {
         request
-          .get("/dashboard")
-          .expect("location", "/")
+          .get('/dashboard')
+          .expect('location', '/')
           .expect(302)
           .end(done);
       });
     });
 
-    context("when user is logged on system", () => {
+    context('when user is logged on system', () => {
       let stub;
 
       beforeEach((done) => {
-        stub = sinon.stub(app.context.models.user, "valid");
+        stub = sinon.stub(app.context.models.user, 'valid');
         stub.returns(true);
 
         request
-          .post("/login")
-          .send({ email: "michael@dgmike.com.br", password: "1234" })
+          .post('/login')
+          .send({ email: 'michael@dgmike.com.br', password: '1234' })
           .end(done);
       });
 
       afterEach(() => { stub.restore(); });
 
-      it("should have logout link", (done) => {
+      it('should have logout link', (done) => {
         request
-          .get("/dashboard")
+          .get('/dashboard')
           .expect(/href="\/logout"/)
           .end(done);
       });
     });
   });
 
-  describe("GET /logout", () => {
-    context("when user is NOT logged", () => {
-      it("should redirect to homepage", (done) => {
+  describe('GET /logout', () => {
+    context('when user is NOT logged', () => {
+      it('should redirect to homepage', (done) => {
         request
-          .get("/logout")
+          .get('/logout')
           .expect(302)
-          .expect("Location", "/")
+          .expect('Location', '/')
           .end(done);
       });
 
-      it.skip("should clear cookies", (done) => {
+      it.skip('should clear cookies', (done) => {
         request
-          .get("/logout")
+          .get('/logout')
           .expect((res) => {
-            if (res.headers["set-cookie"]) {
+            if (res.headers['set-cookie']) {
               throw new Error(`"set-cookie" header exists in response: ${JSON.stringify(res.headers)}`);
             }
           })
@@ -210,25 +210,25 @@ describe("fluxojs", () => {
       });
     });
 
-    context("when user is logged", () => {
+    context('when user is logged', () => {
       let stub;
 
       beforeEach((done) => {
-        stub = sinon.stub(app.context.models.user, "valid");
+        stub = sinon.stub(app.context.models.user, 'valid');
         stub.returns(true);
 
         request
-          .post("/login")
-          .send({ email: "michael@dgmike.com.br", password: "1234" })
+          .post('/login')
+          .send({ email: 'michael@dgmike.com.br', password: '1234' })
           .end(done);
       });
 
       afterEach(() => { stub.restore(); });
 
-      it("should redirect to root", (done) => {
+      it('should redirect to root', (done) => {
         request
-          .get("/logout")
-          .expect("Location", "/")
+          .get('/logout')
+          .expect('Location', '/')
           .expect(302)
           .end(done);
       });
