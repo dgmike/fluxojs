@@ -4,13 +4,16 @@ const views = require("koa-views");
 const koaStatic = require("koa-static");
 const koaBody = require("koa-body");
 const session = require("koa-session");
+const dotenvSafe = require('dotenv-safe');
+
+const env = dotenvSave.load().required;
 
 const models = require("./models");
 
 const app = new Koa();
 const router = new Router();
 
-app.keys = (process.env.SECRET_KEYS || "some secret key").split(",");
+app.keys = (env.SECRET_KEYS || "some secret key").split(",");
 
 const SESSION_CONFIG = {
   key: "fluxojs:sess", /** (string) cookie key (default is koa:sess) */
@@ -84,7 +87,7 @@ app
 
 /* istanbul ignore if */
 if (!module.parent) {
-  const port = process.env.PORT || "3000";
+  const port = env.PORT || "3000";
 
   app.listen(port, () => {
     process.stdout.write(`Running on http://localhost:${port}\n`);
