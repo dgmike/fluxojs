@@ -25,19 +25,19 @@
   },
   "homepage": "https://github.com/dgmike/fluxojs#readme",
   "dependencies": {
-    "dotenv-safe": "^5.0.1",
-    "koa": "^2.5.0",
-    "koa-body": "^2.5.0",
-    "koa-router": "^7.4.0",
-    "koa-session": "^5.8.1",
-    "koa-static": "^4.0.2",
-    "koa-views": "^6.1.4",
-    "pug": "^2.0.3"
+    "dotenv-safe": "5.0.1",
+    "koa": "2.5.0",
+    "koa-body": "2.5.0",
+    "koa-router": "7.4.0",
+    "koa-session": "5.8.1",
+    "koa-static": "4.0.2",
+    "koa-views": "6.1.4",
+    "pug": "2.0.3"
   },
   "devDependencies": {
     "babel-eslint": "8.2.3",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.6.1",
+    "babel-loader": "7.1.4",
+    "babel-preset-env": "1.6.1",
     "codacy-coverage": "2.1.1",
     "eslint": "4.19.1",
     "eslint-config-airbnb": "16.1.0",
@@ -45,12 +45,12 @@
     "eslint-plugin-import": "2.11.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "7.7.0",
-    "mocha": "5.1.0",
-    "nyc": "11.6.0",
+    "mocha": "5.1.1",
+    "nyc": "11.7.1",
     "sinon": "4.5.0",
     "supertest": "3.0.0",
-    "vue": "^2.5.16",
-    "webpack": "^4.6.0",
-    "webpack-cli": "^2.0.14"
+    "vue": "2.5.16",
+    "webpack": "4.6.0",
+    "webpack-cli": "2.0.14"
   }
 }
