@@ -10,6 +10,11 @@ body {
     text-align: center;
 }
 
+h1 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
 header {
     position: fixed;
     top: 0;
@@ -29,12 +34,6 @@ header {
     background: -o-linear-gradient(top, #fafafa 0%, #eeeeee 100%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top, #fafafa 0%, #eeeeee 100%); /* IE10+ */
     background: linear-gradient(to bottom, #fafafa 0%,#eeeeee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
-}
-
-header h1 {
-    margin: 0;
-    font-size: 1.2rem;
 }
 
 header nav {
@@ -68,7 +67,7 @@ header nav a:last-of-type {
     border-right: 0;
 }
 
-header nav a.currentmonth {
+header nav .currentmonth {
     min-width: 5rem;
 }
 
@@ -76,7 +75,6 @@ main {
     margin-top: 1rem;
     width: 100%;
     margin: 15px;
-    box-sizing: border-box;
 }
 
 table {
