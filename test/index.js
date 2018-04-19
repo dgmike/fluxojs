@@ -136,7 +136,7 @@ describe('fluxojs', () => {
           .send({ email: 'michael@dgmike.com.br', password: '1234' })
           .expect((res) => {
             if (res.headers['set-cookie']) {
-              throw new Error("'set-cookie' header exists in response");
+              throw new Error('"set-cookie" header exists in response');
             }
           })
           .end(done);
