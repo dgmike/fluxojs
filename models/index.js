@@ -1,5 +1,5 @@
 module.exports = {
   user: {
-    valid: async (username, password) => username === 'michael' && password === '1234',
+    valid: async (username, password) => username === 'michael@dgmike.com.br' && password === '1234',
   },
 };
