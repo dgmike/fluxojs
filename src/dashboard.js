@@ -83,6 +83,6 @@ Vue.component(
 document.querySelector('#mainarea').innerHTML = '<account-table></account-table>';
 
 
-new Vue({  // eslint-disable-line no-new
+new Vue({ // eslint-disable-line no-new
   el: '#mainarea',
 });
