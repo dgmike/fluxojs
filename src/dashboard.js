@@ -1,12 +1,48 @@
 const vue = require('vue');
 
+import AccountLines from './account-lines.vue';
+import AccountLine from './account-line.vue';
+
 const Vue = vue.default;
 
 Vue.component(
   'account-table',
   {
-    data: () => {
-      return {};
+    components: {
+      AccountLines,
+      AccountLine,
+    },
+    data() {
+      return {
+        entrances: [
+          {
+            id: 1,
+            day: 1,
+            description: 'salário',
+            estimate: 1500,
+            real: 1402.23,
+            status: true,
+          },
+          {
+            id: 2,
+            day: 12,
+            description: 'salário (adiantamento)',
+            estimate: 1500,
+            real: 1402.23,
+            status: false,
+          },
+        ],
+        outputs: [
+          {
+            id: 3,
+            day: 21,
+            description: 'compras',
+            estimate: -1500,
+            real: -1402.23,
+            status: false,
+          },
+        ],
+      };
     },
     template: `
       <table>
@@ -18,10 +54,31 @@ Vue.component(
           <th>Estado</th>
           <th>Ações</th>
         </thead>
-        <tfoot>
-        </tfoot>
+        <account-lines title="Entradas">
+          <account-line
+            v-for="line in entrances"
+            :key="line.id"
+            :day="line.day"
+            :description="line.description"
+            :estimate="line.estimate"
+            :real="line.real"
+            :status="line.status"
+          ></account-line>
+        </account-lines>
+        <account-lines title="Saidas">
+          <account-line
+            v-for="line in outputs"
+            :key="line.id"
+            :day="line.day"
+            :description="line.description"
+            :estimate="line.estimate"
+            :real="line.real"
+            :status="line.status"
+          ></account-line>
+        </account-lines>
+        <tfoot></tfoot>
       </table>
-    `,
+    `
   }
 );
 
