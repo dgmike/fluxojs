@@ -32,7 +32,8 @@
     "koa-session": "5.8.1",
     "koa-static": "4.0.2",
     "koa-views": "6.1.4",
-    "pug": "2.0.3"
+    "pug": "2.0.3",
+    "vue": "2.5.16"
   },
   "devDependencies": {
     "babel-eslint": "8.2.3",
@@ -54,7 +55,6 @@
     "nyc": "11.7.1",
     "sinon": "4.5.0",
     "supertest": "3.0.0",
-    "vue": "2.5.16",
     "vue-loader": "14.2.2",
     "vue-template-compiler": "2.5.16",
     "webpack": "4.6.0",

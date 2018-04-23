@@ -1,9 +1,6 @@
-const vue = require('vue');
-
+import Vue from 'vue';
 import AccountLines from './account-lines.vue';
 import AccountLine from './account-line.vue';
-
-const Vue = vue.default;
 
 Vue.component(
   'account-table',
@@ -78,12 +75,12 @@ Vue.component(
         </account-lines>
         <tfoot></tfoot>
       </table>
-    `
-  }
+    `,
+  },
 );
 
 document.querySelector('#mainarea').innerHTML = '<account-table></account-table>';
 
-const main = new Vue({
-  el: '#mainarea'
+new Vue({
+  el: '#mainarea',
 });
