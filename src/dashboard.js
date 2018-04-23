@@ -1,3 +1,4 @@
+/* eslint-env node, browser */
 import Vue from 'vue';
 import AccountLines from './account-lines.vue';
 import AccountLine from './account-line.vue';
@@ -81,8 +82,7 @@ Vue.component(
 
 document.querySelector('#mainarea').innerHTML = '<account-table></account-table>';
 
-(() => {
-  new Vue({
-    el: '#mainarea',
-  });
-})();
+
+new Vue({  // eslint-disable-line no-new
+  el: '#mainarea',
+});
