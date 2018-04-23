@@ -8,7 +8,7 @@
     "test": "mocha",
     "eslint": "eslint .",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | codacy-coverage",
-    "webpack": "./node_modules/.bin/webpack --mode=production -w --no-color --display-modules",
+    "webpack": "./node_modules/.bin/webpack --mode=production --no-color --display-modules",
     "webpack:dev": "./node_modules/.bin/webpack -w --mode=development --no-color --display-modules"
   },
   "repository": {
