@@ -4,7 +4,7 @@ module.exports = {
   entry: './src/dashboard.js',
   output: {
     path: path.resolve(__dirname, 'static', 'js'),
-    filename: 'dashboard.js'
+    filename: 'dashboard.js',
   },
   module: {
     rules: [
@@ -15,14 +15,21 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['env'],
+            plugins: ['transform-vue-jsx'],
           },
+        },
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
         },
       },
     ],
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js' // 'vue/dist/vue.common.js' for webpack 1
-    }
-  }
+      vue$: 'vue/dist/vue.esm.js',
+    },
+  },
 };
