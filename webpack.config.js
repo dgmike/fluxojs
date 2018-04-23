@@ -4,7 +4,7 @@ module.exports = {
   entry: './src/dashboard.js',
   output: {
     path: path.resolve(__dirname, 'static', 'js'),
-    filename: 'dashboard.js'
+    filename: 'dashboard.js',
   },
   module: {
     rules: [
@@ -29,7 +29,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
-    }
-  }
+      vue$: 'vue/dist/vue.esm.js',
+    },
+  },
 };

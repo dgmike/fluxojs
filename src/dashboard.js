@@ -81,6 +81,8 @@ Vue.component(
 
 document.querySelector('#mainarea').innerHTML = '<account-table></account-table>';
 
-new Vue({
-  el: '#mainarea',
-});
+(() => {
+  new Vue({
+    el: '#mainarea',
+  });
+})();
