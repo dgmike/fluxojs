@@ -74,7 +74,11 @@ header nav .currentmonth {
 main {
     margin-top: 1rem;
     width: 100%;
-    margin: 15px;
+}
+
+main > #mainarea {
+  margin-right: 15px;
+  margin-left: 15px;
 }
 
 table {
