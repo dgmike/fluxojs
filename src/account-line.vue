@@ -2,12 +2,12 @@
   <tr>
     <td>{{ theDay }}</td>
     <td>{{ description }}</td>
-    <td class="text-center">{{ theEstimate }}</td>
-    <td class="text-center">{{ theReal }}</td>
+    <td class="text-center" :class="{ negative: estimate < 0 }">{{ theEstimate }}</td>
+    <td class="text-center" :class="{ negative: real < 0 }">{{ theReal }}</td>
     <td class="text-center">{{ theState }}</td>
     <td class="text-center">
-      <a href="#">Editar</a>
-      <a href="#">Remover</a>
+      <a class="btn default" href="#">Editar</a>
+      <a class="btn danger" href="#">Remover</a>
     </td>
   </tr>
 </template>
@@ -58,10 +58,45 @@ module.exports = {
 
 <style scoped>
 tr {
-  cursor: pointer;
+  cursor: default;
 }
 
 tr:hover {
-  background: #ffffee;
+  background: #ffffcc;
+}
+
+.negative {
+  color: #ff8888;
+}
+
+.btn {
+  display: inline-block;
+  padding: 3px 5px;
+  background: #eeeeee;
+  border: 0;
+  color: #333333;
+  text-decoration: none;
+  font-size: .75rem;
+  border-radius: 3px;
+}
+
+.btn.default {
+  background: #ffffff;
+  color: #333333;
+  border: 1px solid #eeeeee;
+}
+
+.btn.default:hover, .btn.default:focus {
+  background: #f5f5f5;
+}
+
+.btn.danger {
+  background: #ff7777;
+  color: #ffffff;
+  border: 1px solid #ff1111;
+}
+
+.btn.danger:hover, .btn.danger:focus {
+  background: #ff4444;
 }
 </style>
