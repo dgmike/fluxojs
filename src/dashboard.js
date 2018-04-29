@@ -17,17 +17,36 @@ Vue.component(
     },
     props: ['entrances', 'outputs'],
     computed: {
-      totals: function () {
-        const estimateValue = this.$props.entrances.map(e => e.estimate || 0).reduce((a, b) => b+=a, 0) +
-          this.$props.outputs.map(e => e.estimate || 0).reduce((a, b) => b+=a, 0);
+      totals() {
+        const estimateEntrances = this.$props.entrances
+          .map(e => e.estimate || 0)
+          .reduce((a, b) => { const c = b + a; return c; }, 0);
 
-        const realValue = this.$props.entrances.map(e => e.real || 0).reduce((a, b) => b+=a, 0) +
-          this.$props.outputs.map(e => e.real || 0).reduce((a, b) => b+=a, 0);
+        const estimateOutputs = this.$props.outputs
+          .map(e => e.estimate || 0)
+          .reduce((a, b) => { const c = b + a; return c; }, 0);
+
+        const estimateValue = estimateEntrances + estimateOutputs;
+
+        const realEntrances = this.$props.entrances
+          .map(e => e.real || 0)
+          .reduce((a, b) => { const c = b + a; return c; }, 0);
+
+        const realOutputs = this.$props.outputs
+          .map(e => e.real || 0)
+          .reduce((a, b) => { const c = b + a; return c; }, 0);
+
+        const realValue = realEntrances + realOutputs;
 
         const real = realValue ? numeral(realValue).format('$ 0,0.00') : '-';
         const estimate = estimateValue ? numeral(estimateValue).format('$ 0,0.00') : '-';
 
-        return { estimate, real, estimateValue, realValue };
+        return {
+          estimate,
+          real,
+          estimateValue,
+          realValue,
+        };
       },
     },
     template: `
@@ -77,7 +96,7 @@ Vue.component(
 
 new Vue({ // eslint-disable-line no-new
   el: '#mainarea',
-	template: '<account-table :entrances="entrances" :outputs="outputs"></account-table>',
+  template: '<account-table :entrances="entrances" :outputs="outputs"></account-table>',
   data: {
     entrances: [
       {
