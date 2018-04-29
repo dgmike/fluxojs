@@ -5,10 +5,9 @@ const koaStatic = require('koa-static');
 const koaBody = require('koa-body');
 const session = require('koa-session');
 const dotEnvSafe = require('dotenv-safe');
+const models = require('./models');
 
 const env = dotEnvSafe.load().required;
-
-const models = require('./models');
 
 const app = new Koa();
 const router = new Router();
@@ -36,7 +35,7 @@ app.use(views(`${__dirname}/views`, { extension: 'pug' }));
 app.use(koaStatic(`${__dirname}/static`));
 app.use(session(SESSION_CONFIG, app));
 
-app.context.models = models;
+app.context.models = models.configure(env).models;
 
 router.get('root', '/', async (ctx) => {
   if (ctx.session.logged) {

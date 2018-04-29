@@ -9,7 +9,8 @@
     "eslint": "eslint --ext '.js,.vue' .",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | codacy-coverage",
     "webpack": "./node_modules/.bin/webpack --mode=production --no-color --display-modules",
-    "webpack:dev": "./node_modules/.bin/webpack -w --mode=development --no-color --display-modules"
+    "webpack:dev": "./node_modules/.bin/webpack -w --mode=development --no-color --display-modules",
+    "sync": "node bin/sync_database"
   },
   "repository": {
     "type": "git",
@@ -32,8 +33,10 @@
     "koa-session": "5.8.1",
     "koa-static": "4.0.2",
     "koa-views": "6.1.4",
+    "mysql2": "^1.5.3",
     "numeral": "2.0.6",
     "pug": "2.0.3",
+    "sequelize": "^4.37.6",
     "vue": "2.5.16"
   },
   "devDependencies": {
@@ -56,6 +59,7 @@
     "mocha": "5.1.1",
     "nyc": "11.7.1",
     "sinon": "4.5.0",
+    "sqlite3": "^4.0.0",
     "supertest": "3.0.0",
     "vue-loader": "15.0.4",
     "vue-template-compiler": "2.5.16",
