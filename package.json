@@ -32,6 +32,7 @@
     "koa-session": "5.8.1",
     "koa-static": "4.0.2",
     "koa-views": "6.1.4",
+    "numeral": "2.0.6",
     "pug": "2.0.3",
     "vue": "2.5.16"
   },
@@ -51,7 +52,6 @@
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "7.7.0",
     "mocha": "5.1.1",
-    "numeral": "2.0.6",
     "nyc": "11.7.1",
     "sinon": "4.5.0",
     "supertest": "3.0.0",
