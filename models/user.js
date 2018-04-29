@@ -15,15 +15,15 @@ module.exports = (sequelize, DataTypes) => {
 
   Model.valid = async (username, password) => {
     const resource = await Model.findOne({
-        email: username,
-      });
+      email: username,
+    });
 
     if (!resource) {
       return false;
     }
 
     return resource.password === password;
-  }
+  };
 
   return Model;
 };

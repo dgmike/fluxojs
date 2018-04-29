@@ -5,9 +5,11 @@ const env = dotEnvSafe.load().required;
 
 const sequelize = models.configure(env);
 
-(async function () {
+const seed = async () => {
   await sequelize.models.user.create({
     email: 'michael@dgmike.com.br',
     password: '1234',
   });
-})();
+};
+
+seed();
