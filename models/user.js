@@ -13,7 +13,17 @@ module.exports = (sequelize, DataTypes) => {
 
   // Model.associate = (sequelize) => {};
 
-  Model.valid = (username, password) => username === 'michael@dgmike.com.br' && password === '1234';
+  Model.valid = async (username, password) => {
+    const resource = await Model.findOne({
+        email: username,
+      });
+
+    if (!resource) {
+      return false;
+    }
+
+    return resource.password === password;
+  }
 
   return Model;
 };

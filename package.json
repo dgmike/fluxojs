@@ -10,7 +10,9 @@
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | codacy-coverage",
     "webpack": "./node_modules/.bin/webpack --mode=production --no-color --display-modules",
     "webpack:dev": "./node_modules/.bin/webpack -w --mode=development --no-color --display-modules",
-    "sync": "node bin/sync_database"
+    "db:sync": "node bin/sync_database",
+    "db:seed": "node bin/seed",
+    "db:reset": "npm run db:sync && npm run db:seed"
   },
   "repository": {
     "type": "git",
