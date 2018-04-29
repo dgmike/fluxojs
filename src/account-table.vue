@@ -13,7 +13,7 @@
         <th colspan="2">Total</th>
         <th>{{ totals.estimate }}</th>
         <th>{{ totals.real }}</th>
-        <th colspan="3"></th>
+        <th colspan="3"/>
       </tr>
     </tfoot>
     <account-lines title="Entradas">
@@ -25,7 +25,7 @@
         :estimate="line.estimate"
         :real="line.real"
         :status="line.status"
-      ></account-line>
+      />
     </account-lines>
     <account-lines title="Saidas">
       <account-line
@@ -36,18 +36,19 @@
         :estimate="line.estimate"
         :real="line.real"
         :status="line.status"
-      ></account-line>
+      />
     </account-lines>
   </table>
 </template>
 
 <script>
-const numeral = require('numeral');
-require('numeral/locales/pt-br');
-numeral.locale('pt-br');
-
 import AccountLines from './account-lines.vue';
 import AccountLine from './account-line.vue';
+
+const numeral = require('numeral');
+require('numeral/locales/pt-br');
+
+numeral.locale('pt-br');
 
 module.exports = {
   components: {

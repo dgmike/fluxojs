@@ -13,9 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 
   // Model.associate = (sequelize) => {};
 
-  Model.valid = (username, password) => {
-    return username === 'michael@dgmike.com.br' && password === '1234';
-  };
+  Model.valid = (username, password) => username === 'michael@dgmike.com.br' && password === '1234';
 
   return Model;
 };
