@@ -15,7 +15,22 @@ Vue.component(
       AccountLines,
       AccountLine,
     },
-    props: ['entrances', 'outputs'],
+    props: {
+      entrances: {
+        type: Array,
+        required: true,
+        default() {
+          return [];
+        },
+      },
+      outputs: {
+        type: Array,
+        required: true,
+        default() {
+          return [];
+        },
+      },
+    },
     computed: {
       totals() {
         const estimateEntrances = this.$props.entrances
@@ -96,7 +111,6 @@ Vue.component(
 
 new Vue({ // eslint-disable-line no-new
   el: '#mainarea',
-  template: '<account-table :entrances="entrances" :outputs="outputs"></account-table>',
   data: {
     entrances: [
       {
@@ -135,4 +149,5 @@ new Vue({ // eslint-disable-line no-new
       },
     ],
   },
+  template: '<account-table :entrances="entrances" :outputs="outputs"></account-table>',
 });
