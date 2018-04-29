@@ -2,12 +2,20 @@
   <tr>
     <td>{{ theDay }}</td>
     <td>{{ description }}</td>
-    <td class="text-center" :class="{ negative: estimate < 0 }">{{ theEstimate }}</td>
-    <td class="text-center" :class="{ negative: real < 0 }">{{ theReal }}</td>
+    <td
+      :class="{ negative: estimate < 0 }"
+      class="text-center">{{ theEstimate }}</td>
+    <td
+      :class="{ negative: real < 0 }"
+      class="text-center">{{ theReal }}</td>
     <td class="text-center">{{ theState }}</td>
     <td class="text-center">
-      <a class="btn default" href="#">Editar</a>
-      <a class="btn danger" href="#">Remover</a>
+      <a
+        class="btn default"
+        href="#">Editar</a>
+      <a
+        class="btn danger"
+        href="#">Remover</a>
     </td>
   </tr>
 </template>
@@ -39,7 +47,7 @@ module.exports = {
   computed: {
     theDay() {
       if (this.day < 10) {
-        return '0' + this.day;
+        return `0${this.day}`;
       }
       return this.day;
     },
