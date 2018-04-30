@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/dgmike/fluxojs#readme",
   "dependencies": {
+    "bcrypt": "2.0.1",
     "dotenv-safe": "5.0.1",
     "koa": "2.5.1",
     "koa-body": "2.5.0",
