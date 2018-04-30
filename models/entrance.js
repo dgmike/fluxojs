@@ -1,3 +1,4 @@
+// codebeat:disable[LOC]
 module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.define('entrance', {
     year: {
