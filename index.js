@@ -101,7 +101,10 @@ const errorFieldCheck = (ctx, value, regexp, field) => {
     return errorHandler.json(
       ctx,
       [
-        { path: `/${field}`, message: `${field} field is empty or invalid` },
+        {
+          path: `/${field}`,
+          message: `${field} field is empty or invalid`,
+        },
       ],
     );
   }
