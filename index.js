@@ -6,10 +6,12 @@ const koaBody = require('koa-body');
 const session = require('koa-session');
 const dotEnvSafe = require('dotenv-safe');
 const models = require('./models');
+const morgan = require('koa-morgan');
 
 const env = dotEnvSafe.load().required;
 
 const app = new Koa();
+
 const router = new Router();
 
 app.keys = (env.SECRET_KEYS || 'some secret key').split(',');
@@ -34,6 +36,7 @@ app.use(koaBody());
 app.use(views(`${__dirname}/views`, { extension: 'pug' }));
 app.use(koaStatic(`${__dirname}/static`));
 app.use(session(SESSION_CONFIG, app));
+app.use(morgan('combined'));
 
 app.context.models = models.configure(env).models;
 
