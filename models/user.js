@@ -21,7 +21,9 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  // Model.associate = (sequelize) => {};
+  Model.associate = () => {
+    sequelize.models.user.hasMany(sequelize.models.entrance);
+  };
 
   Model.valid = async (username, password) => {
     const resource = await Model.findOne({

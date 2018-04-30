@@ -7,6 +7,7 @@ const session = require('koa-session');
 const dotEnvSafe = require('dotenv-safe');
 const models = require('./models');
 const morgan = require('koa-morgan');
+const errorHandler = require('./lib/errorHandler');
 
 const env = dotEnvSafe.load().required;
 
@@ -81,6 +82,85 @@ router.get('dashboard', '/dashboard', async (ctx) => {
 router.get('logout', '/logout', async (ctx) => {
   ctx.session = null;
   ctx.redirect(router.url('root'));
+});
+
+/**
+ * API
+ */
+
+const middlewareIsLogged = (ctx, next) => {
+  if (!ctx.session.logged) {
+    return ctx.throw(401);
+  }
+
+  return next();
+};
+
+const errorFieldCheck = (opts) => {
+  if (!(opts.value || '').match(opts.regexp)) {
+    return errorHandler.json(
+      opts.ctx,
+      [
+        {
+          path: `/${opts.field}`,
+          message: `${opts.field} field is empty or invalid`,
+        },
+      ],
+    );
+  }
+  return false;
+};
+
+const validateMonthYear = (ctx, next) => {
+  const { year, month } = ctx.query;
+
+  let error;
+
+  error = errorFieldCheck({
+    ctx,
+    field: 'year',
+    value: year,
+    regex: /^[1-9]\d{3}$/,
+  });
+
+  if (error) {
+    return error;
+  }
+
+  error = errorFieldCheck({
+    ctx,
+    field: 'month',
+    value: month,
+    regex: /^(\0?\d|1[12])$/,
+  });
+
+  if (error) {
+    return error;
+  }
+
+  return next();
+};
+
+router.get('api.entrances.fetch', '/api/entrances', middlewareIsLogged, validateMonthYear, async (ctx) => {
+  const { year, month } = ctx.query;
+
+  const entrances = await ctx.models.entrance.findAll({
+    attributes: ['id', 'year', 'month', 'day', 'real', 'estimate', 'status'],
+    where: {
+      year,
+      month,
+      '$user.email$': ctx.session.email,
+    },
+    include: [
+      {
+        model: ctx.models.user,
+        attributes: [],
+      },
+    ],
+  });
+
+  ctx.body = { entrances };
+  return ctx;
 });
 
 app
