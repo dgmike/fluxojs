@@ -96,7 +96,7 @@ router.get('api.entrances.fetch', '/api/entrances', async (ctx) => {
       ctx,
       [
         { path: '/year', message: 'Year field is empty or invalid' },
-      ]
+      ],
     );
   }
 
@@ -105,7 +105,7 @@ router.get('api.entrances.fetch', '/api/entrances', async (ctx) => {
       ctx,
       [
         { path: '/month', message: 'Month field is empty or invalid' },
-      ]
+      ],
     );
   }
 

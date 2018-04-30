@@ -25,7 +25,7 @@ const seed = async () => {
     day: 18,
     status: 'commited',
     estimate: 233.4,
-    real: 230
+    real: 230,
   });
 };
 

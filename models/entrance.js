@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         min: 1000,
         max: 9999,
-      }
+      },
     },
     month: {
       type: DataTypes.INTEGER.UNSIGNED,
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         min: 1,
         max: 12,
-      }
+      },
     },
     day: {
       type: DataTypes.INTEGER.UNSIGNED,
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         min: 1,
         max: 31,
-      }
+      },
     },
     estimate: {
       type: DataTypes.FLOAT,
@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  Model.associate = (sequelize) => {
+  Model.associate = () => {
     sequelize.models.entrance.belongsTo(sequelize.models.user);
   };
 
