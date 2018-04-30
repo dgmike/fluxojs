@@ -64,7 +64,7 @@
     "eslint-plugin-vue": "4.5.0",
     "mocha": "5.1.1",
     "nyc": "11.7.1",
-    "sinon": "4.5.0",
+    "sinon": "5.0.1",
     "sqlite3": "4.0.0",
     "supertest": "3.0.0",
     "vue-loader": "15.0.4",
