@@ -96,14 +96,14 @@ const middlewareIsLogged = (ctx, next) => {
   return next();
 };
 
-const errorFieldCheck = (ctx, value, regexp, field) => {
-  if (!(value || '').match(regexp)) {
+const errorFieldCheck = (opts) => {
+  if (!(opts.value || '').match(opts.regexp)) {
     return errorHandler.json(
-      ctx,
+      opts.ctx,
       [
         {
-          path: `/${field}`,
-          message: `${field} field is empty or invalid`,
+          path: `/${opts.field}`,
+          message: `${opts.field} field is empty or invalid`,
         },
       ],
     );
@@ -116,12 +116,24 @@ const validateMonthYear = (ctx, next) => {
 
   let error;
 
-  error = errorFieldCheck(ctx, year, /^[1-9]\d{3}$/, 'year');
+  error = errorFieldCheck({
+    ctx,
+    field: 'year',
+    value: year,
+    regex: /^[1-9]\d{3}$/,
+  });
+
   if (error) {
     return error;
   }
 
-  error = errorFieldCheck(ctx, month, /^(\0?\d|1[12])$/, 'month');
+  error = errorFieldCheck({
+    ctx,
+    field: 'month',
+    value: month,
+    regex: /^(\0?\d|1[12])$/,
+  });
+
   if (error) {
     return error;
   }
