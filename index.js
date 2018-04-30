@@ -96,26 +96,31 @@ const middlewareIsLogged = (ctx, next) => {
   return next();
 };
 
-const validateField = (ctx, value, regexp, field) => {
+const errorFieldCheck = (ctx, value, regexp, field) => {
   if (!(value || '').match(regexp)) {
     return errorHandler.json(
       ctx,
       [
-        { path: `/${field}`, message: `${field} field is empty or invalid`, },
+        { path: `/${field}`, message: `${field} field is empty or invalid` },
       ],
     );
   }
-}
+  return false;
+};
 
 const validateMonthYear = (ctx, next) => {
   const { year, month } = ctx.query;
 
-  if (validateField(ctx, year, /^[1-9]\d{3}$/, 'year')) {
-    return;
+  let error;
+
+  error = errorFieldCheck(ctx, year, /^[1-9]\d{3}$/, 'year');
+  if (error) {
+    return error;
   }
 
-  if (validateField(ctx, month, /^(\0?\d|1[12])$/, 'month')) {
-    return;
+  error = errorFieldCheck(ctx, month, /^(\0?\d|1[12])$/, 'month');
+  if (error) {
+    return error;
   }
 
   return next();
