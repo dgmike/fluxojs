@@ -7,6 +7,7 @@ const session = require('koa-session');
 const dotEnvSafe = require('dotenv-safe');
 const models = require('./models');
 const morgan = require('koa-morgan');
+const errorHandler = require('./lib/errorHandler');
 
 const env = dotEnvSafe.load().required;
 
@@ -81,6 +82,50 @@ router.get('dashboard', '/dashboard', async (ctx) => {
 router.get('logout', '/logout', async (ctx) => {
   ctx.session = null;
   ctx.redirect(router.url('root'));
+});
+
+router.get('api.entrances.fetch', '/api/entrances', async (ctx) => {
+  if (!ctx.session.logged) {
+    return ctx.throw(401);
+  }
+
+  const { year, month } = ctx.query;
+
+  if (!(year || '').match(/^[1-9]\d{3}$/)) {
+    return errorHandler.json(
+      ctx,
+      [
+        { path: '/year', message: 'Year field is empty or invalid' },
+      ]
+    );
+  }
+
+  if (!(month || '').match(/^(\0?\d|1[12])$/)) {
+    return errorHandler.json(
+      ctx,
+      [
+        { path: '/month', message: 'Month field is empty or invalid' },
+      ]
+    );
+  }
+
+  const entrances = await ctx.models.entrance.findAll({
+    attributes: ['id', 'year', 'month', 'day', 'real', 'estimate', 'status'],
+    where: {
+      year,
+      month,
+      '$user.email$': ctx.session.email,
+    },
+    include: [
+      {
+        model: ctx.models.user,
+        attributes: [],
+      },
+    ],
+  });
+
+  ctx.body = { entrances };
+  return ctx;
 });
 
 app

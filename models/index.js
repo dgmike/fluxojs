@@ -17,7 +17,7 @@ module.exports = {
       })
       .forEach((name) => {
         if (Object.hasOwnProperty.call(sequelize.models[name], 'associate')) {
-          sequelize.models.associate(sequelize);
+          sequelize.models[name].associate(sequelize);
         }
       });
 
