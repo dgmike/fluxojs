@@ -84,11 +84,19 @@ router.get('logout', '/logout', async (ctx) => {
   ctx.redirect(router.url('root'));
 });
 
-router.get('api.entrances.fetch', '/api/entrances', async (ctx) => {
+/**
+ * API
+ */
+
+const middlewareIsLogged = (ctx, next) => {
   if (!ctx.session.logged) {
     return ctx.throw(401);
   }
 
+  return next();
+};
+
+const validateMonthYear = (ctx, next) => {
   const { year, month } = ctx.query;
 
   if (!(year || '').match(/^[1-9]\d{3}$/)) {
@@ -108,6 +116,12 @@ router.get('api.entrances.fetch', '/api/entrances', async (ctx) => {
       ],
     );
   }
+
+  return next();
+};
+
+router.get('api.entrances.fetch', '/api/entrances', middlewareIsLogged, validateMonthYear, async (ctx) => {
+  const { year, month } = ctx.query;
 
   const entrances = await ctx.models.entrance.findAll({
     attributes: ['id', 'year', 'month', 'day', 'real', 'estimate', 'status'],
