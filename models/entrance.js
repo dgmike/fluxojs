@@ -25,6 +25,10 @@ module.exports = (sequelize, DataTypes) => {
         max: 31,
       },
     },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     estimate: {
       type: DataTypes.FLOAT,
       allowNull: false,
