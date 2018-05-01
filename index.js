@@ -145,7 +145,7 @@ router.get('api.entrances.fetch', '/api/entrances', middlewareIsLogged, validate
   const { year, month } = ctx.query;
 
   const entrances = await ctx.models.entrance.findAll({
-    attributes: ['id', 'year', 'month', 'day', 'real', 'estimate', 'status'],
+    attributes: ['id', 'year', 'month', 'day', 'description', 'real', 'estimate', 'status'],
     where: {
       year,
       month,
