@@ -41,7 +41,7 @@ module.exports = {
       type: Number,
     },
     status: {
-      type: Boolean,
+      type: String,
     },
   },
   computed: {
@@ -52,7 +52,7 @@ module.exports = {
       return this.day;
     },
     theState() {
-      return this.status ? 'Já aconteceu' : 'Ainda não aconteceu';
+      return this.status === 'commited' ? 'Já aconteceu' : 'Ainda não aconteceu';
     },
     theReal() {
       return this.real ? numeral(this.real).format('$ 0,0.00') : '-';
