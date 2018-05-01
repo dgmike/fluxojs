@@ -97,7 +97,7 @@ const middlewareIsLogged = (ctx, next) => {
 };
 
 const errorFieldCheck = (opts) => {
-  if (!(opts.value || '').match(opts.regexp)) {
+  if (!(opts.value || '').match(opts.regex)) {
     return errorHandler.json(
       opts.ctx,
       [
@@ -108,6 +108,7 @@ const errorFieldCheck = (opts) => {
       ],
     );
   }
+
   return false;
 };
 
