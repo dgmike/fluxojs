@@ -1,4 +1,5 @@
 const path = require('path');
+const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
   entry: './src/dashboard.js',
@@ -25,8 +26,18 @@ module.exports = {
         options: {
         },
       },
+      {
+        test: /\.css$/,
+        use: [
+          'vue-style-loader',
+          'css-loader'
+        ]
+      },
     ],
   },
+  plugins: [
+    new VueLoaderPlugin()
+  ],
   resolve: {
     alias: {
       vue$: 'vue/dist/vue.esm.js',
