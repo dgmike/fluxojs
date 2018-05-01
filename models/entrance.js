@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     description: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
     estimate: {
       type: DataTypes.FLOAT,
