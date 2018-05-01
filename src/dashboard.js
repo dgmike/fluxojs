@@ -1,11 +1,11 @@
 /* eslint-env node, browser */
 import Vue from 'vue';
 import moment from 'moment';
-import jquery from 'jquery';
+import axios from 'axios';
 
 import AccountTable from './account-table.vue';
 
-const mainarea = new Vue({ // eslint-disable-line no-new
+new Vue({ // eslint-disable-line no-new
   el: '#mainarea',
   components: {
     AccountTable,
@@ -15,19 +15,20 @@ const mainarea = new Vue({ // eslint-disable-line no-new
     outputs: [],
   },
   template: '<account-table :entrances="entrances" :outputs="outputs"></account-table>',
+  mounted() {
+    this.fetch(moment());
+  },
   methods: {
     fetch(date) {
       const self = this;
       const url = `/api/entrances?year=${date.year()}&month=${date.month()}`;
 
-      jquery
+      axios
         .get(url)
-        .then((data) => {
-          self.entrances = data.entrances.filter(e => e.estimate >= 0);
-          self.outputs = data.entrances.filter(e => e.estimate < 0);
+        .then((response) => {
+          self.entrances = response.data.entrances.filter(e => e.estimate >= 0);
+          self.outputs = response.data.entrances.filter(e => e.estimate < 0);
         });
     }
   }
 });
-
-mainarea.fetch(moment());
