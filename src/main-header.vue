@@ -27,7 +27,8 @@ header nav {
     padding: 0;
 }
 
-header nav a {
+header nav > a,
+header nav > div {
     padding: 15px;
     text-decoration: none;
     color: #333;
@@ -56,12 +57,18 @@ header nav .currentmonth {
 }
 </style>
 
+<style>
+header .date-popover.visible {
+  top: calc(100% + 1rem);
+}
+</style>
+
 <template>
   <header>
       <h1>FluxoJs</h1>
       <nav>
         <a href="#" v-on:click.prevent="prevMonth">&larr;</a>
-        <a class="currentmonth" href="#">{{ month }}</a>
+        <vue-monthly-picker v-if="date" :value="date" dateFormat="MMM/YYYY" :monthLabels="locale" @selected="dateSelected"></vue-monthly-picker>
         <a href="#" v-on:click.prevent="nextMonth">&rarr;</a>
       </nav>
       <nav>
@@ -73,19 +80,31 @@ header nav .currentmonth {
 </template>
 
 <script>
+import VueMonthlyPicker from 'vue-monthly-picker'
+
 const moment = require('moment');
 import 'moment/locale/pt-br';
 moment.locale('pt-BR');
 
+window.m = moment;
+
 module.exports = {
+  components: {
+    VueMonthlyPicker
+  },
   props: {
     date: {
-      type: moment
-    }
+      type: moment,
+    },
   },
   computed: {
     month() {
       return this.date && this.date.format('MMMM/YYYY');
+    }
+  },
+  data() {
+    return {
+      locale: moment.monthsShort(),
     }
   },
   methods: {
@@ -96,6 +115,9 @@ module.exports = {
     nextMonth() {
       const newDate = this.date.clone().add(1, 'month');
       this.$emit('update-month', newDate);
+    },
+    dateSelected(date) {
+      this.$emit('update-month', date);
     }
   }
 };
