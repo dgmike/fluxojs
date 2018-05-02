@@ -30,13 +30,13 @@ module.exports = {
         test: /\.css$/,
         use: [
           'vue-style-loader',
-          'css-loader'
-        ]
+          'css-loader',
+        ],
       },
     ],
   },
   plugins: [
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
   ],
   resolve: {
     alias: {

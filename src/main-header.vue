@@ -13,11 +13,21 @@ header {
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fafafa+0,eeeeee+100;Grey+Blue+3D */
     background: #f8f8f8; /* Old browsers */
     background: -moz-linear-gradient(top, #fafafa 0%, #eeeeee 100%); /* FF3.6-15 */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fafafa), color-stop(100%, #eeeeee)); /* Chrome,Safari4+ */
+    background: -webkit-gradient(  /* Chrome,Safari4+ */
+      linear,
+      left top,
+      left bottom,
+      color-stop(0%, #fafafa),
+      color-stop(100%, #eeeeee)
+    );
     background: -webkit-linear-gradient(top, #fafafa 0%,#eeeeee 100%); /* Chrome10-25,Safari5.1-6 */
     background: -o-linear-gradient(top, #fafafa 0%, #eeeeee 100%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top, #fafafa 0%, #eeeeee 100%); /* IE10+ */
-    background: linear-gradient(to bottom, #fafafa 0%,#eeeeee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: linear-gradient( /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      to bottom,
+      #fafafa 0%,
+      #eeeeee 100%
+    );
 }
 
 header nav {
@@ -65,32 +75,42 @@ header .date-popover.visible {
 
 <template>
   <header>
-      <h1>FluxoJs</h1>
-      <nav>
-        <a href="#" v-on:click.prevent="prevMonth">&larr;</a>
-        <vue-monthly-picker v-if="date" :value="date" dateFormat="MMM/YYYY" :monthLabels="locale" @selected="dateSelected"></vue-monthly-picker>
-        <a href="#" v-on:click.prevent="nextMonth">&rarr;</a>
-      </nav>
-      <nav>
-        <a href="#">Clonar</a>
-        <a href="#">Configurar</a>
-        <a href="/logout">Sair</a>
-      </nav>
+    <h1>FluxoJs</h1>
+    <nav>
+      <a
+        href="#"
+        @click.prevent="prevMonth">&larr;</a>
+      <vue-monthly-picker
+        v-if="date"
+        :value="date"
+        :month-labels="locale"
+        date-format="MMM/YYYY"
+        @selected="dateSelected"/>
+      <a
+        href="#"
+        @click.prevent="nextMonth">&rarr;</a>
+    </nav>
+    <nav>
+      <a href="#">Clonar</a>
+      <a href="#">Configurar</a>
+      <a href="/logout">Sair</a>
+    </nav>
   </header>
 </template>
 
 <script>
-import VueMonthlyPicker from 'vue-monthly-picker'
+import VueMonthlyPicker from 'vue-monthly-picker';
+import 'moment/locale/pt-br';
 
 const moment = require('moment');
-import 'moment/locale/pt-br';
+
 moment.locale('pt-BR');
 
 window.m = moment;
 
 module.exports = {
   components: {
-    VueMonthlyPicker
+    VueMonthlyPicker,
   },
   props: {
     date: {
@@ -100,12 +120,12 @@ module.exports = {
   computed: {
     month() {
       return this.date && this.date.format('MMMM/YYYY');
-    }
+    },
   },
   data() {
     return {
       locale: moment.monthsShort(),
-    }
+    };
   },
   methods: {
     prevMonth() {
@@ -118,7 +138,7 @@ module.exports = {
     },
     dateSelected(date) {
       this.$emit('update-month', date);
-    }
-  }
+    },
+  },
 };
 </script>

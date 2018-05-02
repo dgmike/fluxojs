@@ -17,14 +17,6 @@ new Vue({ // eslint-disable-line no-new
     outputs: [],
     date: null,
   },
-  template: `
-    <div id="page">
-      <main-header :date="date" v-on:update-month="updateMonth"></main-header>
-      <main>
-        <account-table :entrances="entrances" :outputs="outputs"></account-table>
-      </main>
-    </div>
-  `,
   mounted() {
     this.fetch(moment());
   },
@@ -46,6 +38,14 @@ new Vue({ // eslint-disable-line no-new
     },
     updateMonth(date) {
       this.fetch(date);
-    }
-  }
+    },
+  },
+  template: `
+    <div id="page">
+      <main-header :date="date" v-on:update-month="updateMonth"></main-header>
+      <main>
+        <account-table :entrances="entrances" :outputs="outputs"></account-table>
+      </main>
+    </div>
+  `,
 });
