@@ -32,8 +32,14 @@ new Vue({ // eslint-disable-line no-new
         .get(url)
         .then((response) => {
           self.date = date;
-          self.entrances = response.data.entrances.filter(e => e.estimate >= 0);
-          self.outputs = response.data.entrances.filter(e => e.estimate < 0);
+          self.entrances = response.data.entrances.filter((e) => {
+            const result = e.estimate >= 0;
+            return result;
+          });
+          self.outputs = response.data.entrances.filter((e) => {
+            const result = e.estimate < 0;
+            return result;
+          });
         });
     },
     updateMonth(date) {
