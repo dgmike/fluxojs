@@ -11,8 +11,8 @@
     <tfoot>
       <tr>
         <th colspan="2">Total</th>
-        <th>{{ totals.estimate }}</th>
-        <th>{{ totals.real }}</th>
+        <th :class="{ negative: totals.estimateValue < 0 }">{{ totals.estimate }}</th>
+        <th :class="{ negative: totals.realValue < 0 }">{{ totals.real }}</th>
         <th colspan="3"/>
       </tr>
     </tfoot>
@@ -40,6 +40,12 @@
     </account-lines>
   </table>
 </template>
+
+<style scoped>
+.negative {
+  color: #ff8888;
+}
+</style>
 
 <script>
 import AccountLines from './account-lines.vue';

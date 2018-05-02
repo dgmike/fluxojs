@@ -1,50 +1,57 @@
 /* eslint-env node, browser */
 import Vue from 'vue';
+import moment from 'moment';
+import axios from 'axios';
 
+import MainHeader from './main-header.vue';
 import AccountTable from './account-table.vue';
 
 new Vue({ // eslint-disable-line no-new
-  el: '#mainarea',
+  el: '#page',
   components: {
+    MainHeader,
     AccountTable,
   },
   data: {
-    entrances: [
-      {
-        id: 1,
-        day: 1,
-        description: 'salário',
-        estimate: 1500,
-        real: 1402.23,
-        status: true,
-      },
-      {
-        id: 2,
-        day: 15,
-        description: 'salário (adiantamento)',
-        estimate: 1500,
-        real: 1402.23,
-        status: false,
-      },
-    ],
-    outputs: [
-      {
-        id: 3,
-        day: 21,
-        description: 'compras',
-        estimate: -1500,
-        real: -1402.23,
-        status: false,
-      },
-      {
-        id: 4,
-        day: 21,
-        description: 'compras',
-        estimate: -2320,
-        real: 0,
-        status: false,
-      },
-    ],
+    entrances: [],
+    outputs: [],
+    date: null,
   },
-  template: '<account-table :entrances="entrances" :outputs="outputs"></account-table>',
+  mounted() {
+    this.fetch(moment());
+  },
+  methods: {
+    fetch(date) {
+      const self = this;
+
+      self.date = moment();
+
+      const url = `/api/entrances?year=${date.year()}&month=${date.month()}`;
+
+      axios
+        .get(url)
+        .then((response) => {
+          self.date = date;
+          self.entrances = response.data.entrances.filter((e) => {
+            const result = e.estimate >= 0;
+            return result;
+          });
+          self.outputs = response.data.entrances.filter((e) => {
+            const result = e.estimate < 0;
+            return result;
+          });
+        });
+    },
+    updateMonth(date) {
+      this.fetch(date);
+    },
+  },
+  template: `
+    <div id="page">
+      <main-header :date="date" v-on:update-month="updateMonth"></main-header>
+      <main>
+        <account-table :entrances="entrances" :outputs="outputs"></account-table>
+      </main>
+    </div>
+  `,
 });

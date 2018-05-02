@@ -132,7 +132,7 @@ const validateMonthYear = (ctx, next) => {
     ctx,
     field: 'month',
     value: month,
-    regex: /^(\0?\d|1[12])$/,
+    regex: /^(\0?\d|1[012])$/,
   });
 
   if (error) {

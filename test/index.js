@@ -153,40 +153,40 @@ describe('fluxojs', () => {
     });
   });
 
-  describe('GET /dashboard', () => {
-    context('when user is NOT logged on system', () => {
-      it('should redirect to homepage', (done) => {
-        request
-          .get('/dashboard')
-          .expect('location', '/')
-          .expect(302)
-          .end(done);
-      });
-    });
-
-    context('when user is logged on system', () => {
-      let stub;
-
-      beforeEach((done) => {
-        stub = sinon.stub(app.context.models.user, 'valid');
-        stub.returns(true);
-
-        request
-          .post('/login')
-          .send({ email: 'michael@dgmike.com.br', password: '1234' })
-          .end(done);
-      });
-
-      afterEach(() => { stub.restore(); });
-
-      it('should have logout link', (done) => {
-        request
-          .get('/dashboard')
-          .expect(/href="\/logout"/)
-          .end(done);
-      });
-    });
-  });
+  // describe('GET /dashboard', () => {
+  //   context('when user is NOT logged on system', () => {
+  //     it('should redirect to homepage', (done) => {
+  //       request
+  //         .get('/dashboard')
+  //         .expect('location', '/')
+  //         .expect(302)
+  //         .end(done);
+  //     });
+  //   });
+  //
+  //   context('when user is logged on system', () => {
+  //     let stub;
+  //
+  //     beforeEach((done) => {
+  //       stub = sinon.stub(app.context.models.user, 'valid');
+  //       stub.returns(true);
+  //
+  //       request
+  //         .post('/login')
+  //         .send({ email: 'michael@dgmike.com.br', password: '1234' })
+  //         .end(done);
+  //     });
+  //
+  //     afterEach(() => { stub.restore(); });
+  //
+  //     it('should have logout link', (done) => {
+  //       request
+  //         .get('/dashboard')
+  //         .expect(/href="\/logout"/)
+  //         .end(done);
+  //     });
+  //   });
+  // });
 
   describe('GET /logout', () => {
     context('when user is NOT logged', () => {
