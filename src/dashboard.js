@@ -24,13 +24,16 @@ new Vue({ // eslint-disable-line no-new
     fetch(date) {
       const self = this;
 
-      self.date = moment();
-
+      const timer = setTimeout(() => {
+        self.date = null;
+      }, 500);
       const url = `/api/entrances?year=${date.year()}&month=${date.month()}`;
 
       axios
         .get(url)
         .then((response) => {
+          clearTimeout(timer);
+
           self.date = date;
           self.entrances = response.data.entrances.filter((e) => {
             const result = e.estimate >= 0;
@@ -47,7 +50,7 @@ new Vue({ // eslint-disable-line no-new
     },
   },
   template: `
-    <div id="page">
+    <div>
       <main-header :date="date" v-on:update-month="updateMonth"></main-header>
       <main>
         <account-table :entrances="entrances" :outputs="outputs"></account-table>

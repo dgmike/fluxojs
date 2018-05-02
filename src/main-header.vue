@@ -65,6 +65,22 @@ header nav a:last-of-type {
 header nav .currentmonth {
     min-width: 5rem;
 }
+
+.loading {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: .5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .5;
+  }
+}
 </style>
 
 <style>
@@ -76,12 +92,11 @@ header .date-popover.visible {
 <template>
   <header>
     <h1>FluxoJs</h1>
-    <nav>
+    <nav v-if="date">
       <a
         href="#"
         @click.prevent="prevMonth">&larr;</a>
       <vue-monthly-picker
-        v-if="date"
         :value="date"
         :month-labels="locale"
         date-format="MMM/YYYY"
@@ -90,9 +105,14 @@ header .date-popover.visible {
         href="#"
         @click.prevent="nextMonth">&rarr;</a>
     </nav>
+    <nav
+      v-else
+      class="loading">
+      Carregando...
+    </nav>
     <nav>
-      <a href="#">Clonar</a>
-      <a href="#">Configurar</a>
+      <!-- <a href="#">Clonar</a> -->
+      <!-- <a href="#">Configurar</a> -->
       <a href="/logout">Sair</a>
     </nav>
   </header>
