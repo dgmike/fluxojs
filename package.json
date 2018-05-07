@@ -45,7 +45,7 @@
     "mysql2": "1.5.3",
     "numeral": "2.0.6",
     "pug": "2.0.3",
-    "sequelize": "4.37.6",
+    "sequelize": "4.37.7",
     "vue": "2.5.16",
     "vue-monthly-picker": "0.2.0"
   },
