@@ -71,7 +71,7 @@
     "sinon": "5.0.7",
     "sqlite3": "4.0.0",
     "supertest": "3.0.0",
-    "vue-loader": "15.0.9",
+    "vue-loader": "15.0.10",
     "vue-template-compiler": "2.5.16",
     "webpack": "4.8.1",
     "webpack-cli": "2.1.3"
