@@ -35,7 +35,7 @@
     "dotenv-safe": "5.0.1",
     "http-errors": "1.6.3",
     "koa": "2.5.1",
-    "koa-body": "2.5.0",
+    "koa-body": "2.6.0",
     "koa-morgan": "1.0.1",
     "koa-router": "7.4.0",
     "koa-session": "5.8.1",
