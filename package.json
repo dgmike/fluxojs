@@ -41,7 +41,7 @@
     "koa-session": "5.8.1",
     "koa-static": "4.0.3",
     "koa-views": "6.1.4",
-    "moment": "2.22.1",
+    "moment": "2.22.2",
     "mysql2": "1.5.3",
     "numeral": "2.0.6",
     "pug": "2.0.3",
@@ -74,6 +74,6 @@
     "vue-loader": "15.2.4",
     "vue-template-compiler": "2.5.16",
     "webpack": "4.10.2",
-    "webpack-cli": "2.1.5"
+    "webpack-cli": "3.0.1"
   }
 }
