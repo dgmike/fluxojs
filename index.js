@@ -5,8 +5,8 @@ const koaStatic = require('koa-static');
 const koaBody = require('koa-body');
 const session = require('koa-session');
 const dotEnvSafe = require('dotenv-safe');
-const models = require('./models');
 const morgan = require('koa-morgan');
+const models = require('./models');
 const errorHandler = require('./lib/errorHandler');
 
 const env = dotEnvSafe.load().required;
