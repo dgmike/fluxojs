@@ -178,7 +178,7 @@ router.post('api.entrances.create', '/api/entrances', middlewareIsLogged, async 
     description,
     estimate,
     real,
-    status
+    status,
   } = ctx.request.body;
 
   try {
@@ -192,9 +192,10 @@ router.post('api.entrances.create', '/api/entrances', middlewareIsLogged, async 
       status,
     });
 
-    ctx.body = { entrances }
+    ctx.body = { entrance };
     return ctx;
   } catch (err) {
+    return ctx.throw(422);
   }
 });
 
