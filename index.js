@@ -168,6 +168,25 @@ router.get('api.entrances.fetch', '/api/entrances', middlewareIsLogged, validate
   return ctx;
 });
 
+router.post('api.entrances.create', '/api/entrances', middlewareIsLogged, async (ctx) => {
+  let entrance;
+
+  const { year, month, day, description, estimate, real, status } = ctx.request.body;
+
+  try {
+    entrance = await ctx.models.entrance.create({
+      year,
+      month,
+      day,
+      description,
+      estimate,
+      real,
+      status,
+    });
+  } catch (err) {
+  }
+});
+
 app
   .use(router.routes())
   .use(router.allowedMethods());
