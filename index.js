@@ -49,6 +49,10 @@ router.get('root', '/', async (ctx) => {
   await ctx.render('index');
 });
 
+router.get('/login', async (ctx) => {
+  ctx.redirect(router.url('root'));
+});
+
 router.post('/login', async (ctx) => {
   const { email, password } = ctx.request.body;
 
@@ -162,6 +166,25 @@ router.get('api.entrances.fetch', '/api/entrances', middlewareIsLogged, validate
 
   ctx.body = { entrances };
   return ctx;
+});
+
+router.post('api.entrances.create', '/api/entrances', middlewareIsLogged, async (ctx) => {
+  let entrance;
+
+  const { year, month, day, description, estimate, real, status } = ctx.request.body;
+
+  try {
+    entrance = await ctx.models.entrance.create({
+      year,
+      month,
+      day,
+      description,
+      estimate,
+      real,
+      status,
+    });
+  } catch (err) {
+  }
 });
 
 app
