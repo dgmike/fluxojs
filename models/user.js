@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       set(value) {
-        const max = 15;
+        const max = 8;
         const min = 5;
         const saltRounds = parseInt((Math.random() * (max - min)) + min, 10);
 
