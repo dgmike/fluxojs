@@ -49,6 +49,10 @@ router.get('root', '/', async (ctx) => {
   await ctx.render('index');
 });
 
+router.get('/login', async (ctx) => {
+  ctx.redirect(router.url('root'));
+});
+
 router.post('/login', async (ctx) => {
   const { email, password } = ctx.request.body;
 
