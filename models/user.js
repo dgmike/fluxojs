@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       return false;
     }
 
-    return bcrypt.compareSync(password, resource.password);
+    return bcrypt.compare(password, resource.password);
   };
 
   return Model;
