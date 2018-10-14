@@ -46,7 +46,7 @@
     "numeral": "2.0.6",
     "pug": "2.0.3",
     "sequelize": "4.38.0",
-    "vue": "2.5.16",
+    "vue": "2.5.17",
     "vue-monthly-picker": "0.2.2"
   },
   "devDependencies": {
