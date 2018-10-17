@@ -47,7 +47,7 @@
     "pug": "2.0.3",
     "sequelize": "4.38.0",
     "vue": "2.5.17",
-    "vue-monthly-picker": "0.2.2"
+    "vue-monthly-picker": "0.2.5"
   },
   "devDependencies": {
     "babel-eslint": "8.2.6",
