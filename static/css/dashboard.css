@@ -18,6 +18,7 @@ h1 {
 main {
     margin-top: 1rem;
     width: 100%;
+    margin-bottom: 10rem;
 }
 
 main > #mainarea {
