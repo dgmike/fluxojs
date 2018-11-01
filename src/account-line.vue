@@ -21,7 +21,8 @@
 </template>
 
 <script>
-const numeral = require('numeral');
+// const numeral = require('numeral');
+import numeral from 'numeral';
 require('numeral/locales/pt-br');
 
 numeral.locale('pt-br');

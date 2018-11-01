@@ -182,6 +182,12 @@ router.post('api.entrances.create', '/api/entrances', middlewareIsLogged, async 
   } = ctx.request.body;
 
   try {
+    const user = await ctx.models.user.findOne({ where: { email: ctx.session.email } });
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
     entrance = await ctx.models.entrance.create({
       year,
       month,
@@ -190,12 +196,13 @@ router.post('api.entrances.create', '/api/entrances', middlewareIsLogged, async 
       estimate,
       real,
       status,
+      userId: user.id,
     });
 
     ctx.body = { entrance };
     return ctx;
   } catch (err) {
-    return ctx.throw(422);
+    return ctx.throw(422, err.toString());
   }
 });
 

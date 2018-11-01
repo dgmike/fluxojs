@@ -27,7 +27,8 @@ new Vue({ // eslint-disable-line no-new
       const timer = setTimeout(() => {
         self.date = null;
       }, 500);
-      const url = `/api/entrances?year=${date.year()}&month=${date.month()}`;
+
+      const url = `/api/entrances?year=${date.year()}&month=${date.month() + 1}`;
 
       axios
         .get(url)
@@ -35,14 +36,13 @@ new Vue({ // eslint-disable-line no-new
           clearTimeout(timer);
 
           self.date = date;
-          self.entrances = response.data.entrances.filter((e) => {
-            const result = e.estimate >= 0;
-            return result;
-          });
-          self.outputs = response.data.entrances.filter((e) => {
-            const result = e.estimate < 0;
-            return result;
-          });
+          self.entrances = response.data.entrances
+            .filter(e => e.estimate >= 0)
+            .sort((a, b) => a.day - b.day);
+
+          self.outputs = response.data.entrances
+            .filter(e => e.estimate < 0)
+            .sort((a, b) => a.day - b.day);
         });
     },
     updateMonth(date) {

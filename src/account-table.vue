@@ -50,9 +50,11 @@
 <script>
 import AccountLines from './account-lines.vue';
 import AccountLine from './account-line.vue';
+import numeral from 'numeral';
 
-const numeral = require('numeral');
+// const numeral = require('numeral');
 require('numeral/locales/pt-br');
+// import 'numeral/locales/pt-br';
 
 numeral.locale('pt-br');
 
