@@ -62,7 +62,7 @@ new Vue({ // eslint-disable-line no-new
       this.fetch(date);
     },
     openDialog() {
-      console.info('open dialog')
+      console.info('open dialog');
     },
     resetAndOpenDialog() {
       console.info('reset dialog');
