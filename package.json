@@ -31,7 +31,7 @@
   "dependencies": {
     "axios": "0.18.0",
     "bcrypt": "3.0.2",
-    "chance": "1.0.16",
+    "chance": "1.0.18",
     "dotenv-safe": "6.1.0",
     "http-errors": "1.7.1",
     "koa": "2.6.1",
