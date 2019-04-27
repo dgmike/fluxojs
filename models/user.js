@@ -1,4 +1,5 @@
 /* use 'esversion: 6' */
+// codebeat:disable[LOC]
 
 const bcrypt = require('bcrypt');
 
