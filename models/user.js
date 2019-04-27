@@ -1,4 +1,4 @@
-/* use 'esversion: 6' */
+/* jshint esversion: 6 */
 // codebeat:disable[LOC]
 
 const bcrypt = require('bcrypt');
