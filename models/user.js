@@ -1,3 +1,5 @@
+/* use 'esversion: 6' */
+
 const bcrypt = require('bcrypt');
 
 async function validateUserPassword(username, password) {
