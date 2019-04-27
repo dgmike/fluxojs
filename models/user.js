@@ -1,5 +1,20 @@
 const bcrypt = require('bcrypt');
 
+async function validateUserPassword(username, password) {
+  const resource = await this.findOne({
+    attributes: ['id', 'password'],
+    where: {
+      email: username,
+    },
+  });
+
+  if (!resource) {
+    return false;
+  }
+
+  return bcrypt.compare(password, resource.password);
+}
+
 module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.define('user', {
     email: {
@@ -25,20 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize.models.user.hasMany(sequelize.models.entrance);
   };
 
-  Model.valid = async (username, password) => {
-    const resource = await Model.findOne({
-      attributes: ['id', 'password'],
-      where: {
-        email: username,
-      },
-    });
-
-    if (!resource) {
-      return false;
-    }
-
-    return bcrypt.compare(password, resource.password);
-  };
+  Model.valid = validateUserPassword.bind(Model);
 
   return Model;
 };

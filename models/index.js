@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
   configure(env) {
-    const sequelize = new Sequelize(env.DATABASE, { operatorsAliases: false });
+    const sequelize = new Sequelize(env.DATABASE, {});
 
     fs.readdirSync(__dirname)
       .filter(f => f !== 'index.js' && f.match(/\.js$/))
