@@ -1,4 +1,5 @@
 /* eslint-env node, browser */
+/*jshint esversion: 6 */
 import Vue from 'vue';
 import moment from 'moment';
 import axios from 'axios';
