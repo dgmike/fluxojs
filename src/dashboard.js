@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import MainHeader from './main-header.vue';
 import AccountTable from './account-table.vue';
-import BtnAction from './btn-action.vue'
+import BtnAction from './btn-action.vue';
 import DialogEntrance from './dialog-entrance.vue';
 
 new Vue({ // eslint-disable-line no-new
