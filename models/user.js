@@ -2,7 +2,7 @@
 
 const bcrypt = require('bcrypt');
 
-async function validateUserPassword(username, password) {
+const validateUserPassword = async function validateUserPassword(username, password) {
   const resource = await this.findOne({
     attributes: ['id', 'password'],
     where: {
@@ -15,7 +15,7 @@ async function validateUserPassword(username, password) {
   }
 
   return bcrypt.compare(password, resource.password);
-}
+};
 
 module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.define('user', {
