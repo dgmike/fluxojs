@@ -83,7 +83,7 @@ new Vue({ // eslint-disable-line no-new
       <main>
         <account-table :entrances="entrances" :outputs="outputs"></account-table>
       </main>
-      <btn-action icon="&plus;" v-on:intent-to-add-entrance="resetAndOpenDialog">Add</btn-action>
+      <btn-action icon="plus" v-on:intent-to-add-entrance="resetAndOpenDialog">Add</btn-action>
       <dialog-entrance
         :day="intentEntrance.day"
         :month="intentEntrance.month"

@@ -4,9 +4,12 @@
     type="button"
     @click="$emit('intent-to-add-entrance')"
   >
-    <div class="icon">
-      {{ icon }}
-    </div>
+    <!-- eslint-disable vue/no-v-html -->
+    <div
+      class="icon"
+      v-html="sanitizedIcon"
+    />
+    <!-- eslint-enable vue/no-v-html -->
     <div class="read-only">
       <slot />
     </div>
@@ -19,6 +22,14 @@ export default {
     icon: {
       type: String,
       default: '',
+      validator(value) {
+        return value.match(/^[a-z0-9_]+$/);
+      },
+    },
+  },
+  computed: {
+    sanitizedIcon() {
+      return `&${this.icon};`;
     },
   },
 };
