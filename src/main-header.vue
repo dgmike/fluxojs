@@ -100,6 +100,7 @@ header .date-popover.visible {
       <vue-monthly-picker
         :value="date"
         :month-labels="locale"
+        alignment="center"
         input-class="label"
         date-format="MMM/YYYY"
         @selected="dateSelected"
@@ -127,8 +128,6 @@ header .date-popover.visible {
 import VueMonthlyPicker from 'vue-monthly-picker';
 import 'moment/locale/pt-br';
 import moment from 'moment';
-
-// const moment = require('moment');
 
 moment.locale('pt-BR');
 

@@ -21,6 +21,8 @@ new Vue({ // eslint-disable-line no-new
     entrances: [],
     outputs: [],
     date: null,
+    showDialogEntrance: false,
+    blured: false,
     intentEntrance: {
       year: moment().get('year'),
       day: 1,
@@ -68,11 +70,18 @@ new Vue({ // eslint-disable-line no-new
     updateMonth(date) {
       this.fetch(date);
     },
-    openDialog() {
-      // console.info('open dialog');
+    closeDialog() {
+      const self = this;
+      Object.keys(this.$data).filter(key => key.indexOf('showDialog') !== -1).forEach((dialog) => {
+        self.$set(self.$data, dialog, false);
+      });
+      this.$set(this.$data, 'blured', false);
+    },
+    openDialog(dialogName) {
+      this.$set(this.$data, dialogName, true);
+      this.$set(this.$data, 'blured', true);
     },
     resetAndOpenDialog() {
-      // console.info('reset dialog');
       this.$set(this.$data.intentEntrance, 'year', this.$data.date.get('year'));
       this.$set(this.$data.intentEntrance, 'month', this.$data.date.get('month') + 1);
       this.$set(this.$data.intentEntrance, 'day', 1);
@@ -80,25 +89,26 @@ new Vue({ // eslint-disable-line no-new
       this.$set(this.$data.intentEntrance, 'real', undefined);
       this.$set(this.$data.intentEntrance, 'description', '');
       this.$set(this.$data.intentEntrance, 'status', 'uncommited');
-      this.openDialog();
+      this.openDialog('showDialogEntrance');
     },
   },
   template: `
     <div>
-      <main-header :date="date" v-on:update-month="updateMonth"></main-header>
-      <main>
+      <main-header :date="date" v-on:update-month="updateMonth" :class="{ blured: blured }" />
+      <main :class="{ blured: blured }">
         <account-table :entrances="entrances" :outputs="outputs"></account-table>
       </main>
-      <btn-action icon="plus" v-on:intent-to-add-entrance="resetAndOpenDialog">Add</btn-action>
-      <dialog-entrance
-        :day="intentEntrance.day"
-        :month="intentEntrance.month"
-        :year="intentEntrance.year"
-        :estimate="intentEntrance.estimate"
-        :real="intentEntrance.real"
-        :description="intentEntrance.description"
-        :status="intentEntrance.status"
-        ></dialog-entrance>
+
+      <btn-action icon="plus" @click="resetAndOpenDialog">Add</btn-action>
+
+      <div v-if="showDialogEntrance">
+        <dialog-entrance
+          title="Adicionar uma entrada"
+          @close="closeDialog"
+        >
+          <pre>{{ intentEntrance }}</pre>
+        </dialog-entrance>
+      </div>
     </div>
   `,
 });

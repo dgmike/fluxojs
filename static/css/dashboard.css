@@ -50,3 +50,7 @@ table tfoot th,
 table tfoot td {
     border-top: 2px solid #ccc;
 }
+
+.blured {
+    filter: blur(4px);
+}

@@ -2,7 +2,7 @@
   <button
     class="btn"
     type="button"
-    @click="$emit('intent-to-add-entrance')"
+    @click="click"
   >
     <!-- eslint-disable vue/no-v-html -->
     <div
@@ -30,6 +30,11 @@ export default {
   computed: {
     sanitizedIcon() {
       return `&${this.icon};`;
+    },
+  },
+  methods: {
+    click() {
+      this.$emit('click');
     },
   },
 };
