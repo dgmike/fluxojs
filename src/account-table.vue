@@ -48,6 +48,11 @@
 </template>
 
 <style scoped>
+table {
+  max-width: 992px;
+  margin: 0 auto;
+}
+
 .negative {
   color: #ff8888;
 }
