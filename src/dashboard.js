@@ -1,5 +1,5 @@
 /* eslint-env node, browser */
-/*jshint esversion: 6 */
+/* jshint esversion: 6 */
 import Vue from 'vue';
 import moment from 'moment';
 import axios from 'axios';
@@ -63,10 +63,10 @@ new Vue({ // eslint-disable-line no-new
       this.fetch(date);
     },
     openDialog() {
-      console.info('open dialog');
+      // console.info('open dialog');
     },
     resetAndOpenDialog() {
-      console.info('reset dialog');
+      // console.info('reset dialog');
       this.$set(this.$data.intentEntrance, 'year', this.$data.date.get('year'));
       this.$set(this.$data.intentEntrance, 'month', this.$data.date.get('month') + 1);
       this.$set(this.$data.intentEntrance, 'day', 1);
@@ -75,7 +75,7 @@ new Vue({ // eslint-disable-line no-new
       this.$set(this.$data.intentEntrance, 'description', '');
       this.$set(this.$data.intentEntrance, 'status', 'uncommited');
       this.openDialog();
-    }
+    },
   },
   template: `
     <div>

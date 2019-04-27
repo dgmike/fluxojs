@@ -30,6 +30,7 @@
   "homepage": "https://github.com/dgmike/fluxojs#readme",
   "dependencies": {
     "axios": "0.18.0",
+    "babel-eslint": "^10.0.1",
     "bcrypt": "3.0.6",
     "chance": "1.0.18",
     "dotenv-safe": "6.1.0",
@@ -51,7 +52,6 @@
   },
   "devDependencies": {
     "@babel/core": "7.1.2",
-    "babel-eslint": "10.0.1",
     "babel-helper-vue-jsx-merge-props": "2.0.3",
     "babel-loader": "8.0.5",
     "babel-plugin-syntax-jsx": "6.18.0",
@@ -72,6 +72,7 @@
     "sinon": "7.3.2",
     "sqlite3": "4.0.6",
     "supertest": "3.3.0",
+    "vue-eslint-parser": "^6.0.4",
     "vue-loader": "15.4.2",
     "vue-template-compiler": "2.6.10",
     "webpack": "4.30.0",

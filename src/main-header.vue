@@ -95,20 +95,24 @@ header .date-popover.visible {
     <nav v-if="date">
       <a
         href="#"
-        @click.prevent="prevMonth">&larr;</a>
+        @click.prevent="prevMonth"
+      >&larr;</a>
       <vue-monthly-picker
         :value="date"
         :month-labels="locale"
         input-class="label"
         date-format="MMM/YYYY"
-        @selected="dateSelected"/>
+        @selected="dateSelected"
+      />
       <a
         href="#"
-        @click.prevent="nextMonth">&rarr;</a>
+        @click.prevent="nextMonth"
+      >&rarr;</a>
     </nav>
     <nav
       v-else
-      class="loading">
+      class="loading"
+    >
       Carregando...
     </nav>
     <nav>

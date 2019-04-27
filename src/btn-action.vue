@@ -1,16 +1,27 @@
 <template>
-  <button class="btn" type="button" @click="$emit('intent-to-add-entrance')">
-    <div class="icon" v-html="icon"></div>
-    <div class="read-only"><slot></slot></div>
+  <button
+    class="btn"
+    type="button"
+    @click="$emit('intent-to-add-entrance')"
+  >
+    <div class="icon">
+      {{ icon }}
+    </div>
+    <div class="read-only">
+      <slot />
+    </div>
   </button>
 </template>
 
 <script>
 export default {
   props: {
-    icon: String
-  }
-}
+    icon: {
+      type: String,
+      default: '',
+    },
+  },
+};
 </script>
 
 <style scoped>
