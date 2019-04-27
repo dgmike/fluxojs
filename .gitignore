@@ -1,2 +1,4 @@
 /static/js/dashboard.js
+/node_modules
+/.env
 database.sqlite3*
