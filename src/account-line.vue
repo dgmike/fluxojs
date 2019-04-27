@@ -4,24 +4,36 @@
     <td>{{ description }}</td>
     <td
       :class="{ negative: estimate < 0 }"
-      class="text-center">{{ theEstimate }}</td>
+      class="text-center"
+    >
+      {{ theEstimate }}
+    </td>
     <td
       :class="{ negative: real < 0 }"
-      class="text-center">{{ theReal }}</td>
-    <td class="text-center">{{ theState }}</td>
+      class="text-center"
+    >
+      {{ theReal }}
+    </td>
+    <td class="text-center">
+      {{ theState }}
+    </td>
     <td class="text-center">
       <a
         class="btn default"
-        href="#">Editar</a>
+        href="#"
+      >Editar</a>
       <a
         class="btn danger"
-        href="#">Remover</a>
+        href="#"
+      >Remover</a>
     </td>
   </tr>
 </template>
 
 <script>
-const numeral = require('numeral');
+// const numeral = require('numeral');
+import numeral from 'numeral';
+
 require('numeral/locales/pt-br');
 
 numeral.locale('pt-br');

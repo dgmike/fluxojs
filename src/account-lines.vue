@@ -3,9 +3,12 @@
     <tr>
       <th
         class="subhead"
-        colspan="6">{{ title }}</th>
+        colspan="6"
+      >
+        {{ title }}
+      </th>
     </tr>
-    <slot/>
+    <slot />
   </tbody>
 </template>
 

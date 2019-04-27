@@ -10,10 +10,16 @@
     </thead>
     <tfoot>
       <tr>
-        <th colspan="2">Total</th>
-        <th :class="{ negative: totals.estimateValue < 0 }">{{ totals.estimate }}</th>
-        <th :class="{ negative: totals.realValue < 0 }">{{ totals.real }}</th>
-        <th colspan="3"/>
+        <th colspan="2">
+          Total
+        </th>
+        <th :class="{ negative: totals.estimateValue < 0 }">
+          {{ totals.estimate }}
+        </th>
+        <th :class="{ negative: totals.realValue < 0 }">
+          {{ totals.real }}
+        </th>
+        <th colspan="3" />
       </tr>
     </tfoot>
     <account-lines title="Entradas">
@@ -48,11 +54,13 @@
 </style>
 
 <script>
+import numeral from 'numeral';
 import AccountLines from './account-lines.vue';
 import AccountLine from './account-line.vue';
 
-const numeral = require('numeral');
+// const numeral = require('numeral');
 require('numeral/locales/pt-br');
+// import 'numeral/locales/pt-br';
 
 numeral.locale('pt-br');
 
