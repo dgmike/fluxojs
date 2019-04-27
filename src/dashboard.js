@@ -57,6 +57,12 @@ new Vue({ // eslint-disable-line no-new
           self.outputs = response.data.entrances
             .filter(e => e.estimate < 0)
             .sort((a, b) => a.day - b.day);
+
+          return response;
+        })
+        .catch(() => {
+          // TODO: implement error
+          clearTimeout(timer);
         });
     },
     updateMonth(date) {

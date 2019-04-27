@@ -1,3 +1,6 @@
 root: true
+plugins:
+  - promise
 extends:
   - airbnb-base
+  - plugin:promise/recommended
