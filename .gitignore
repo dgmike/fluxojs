@@ -1,2 +1,3 @@
 /static/js/dashboard.js
+/node_modules
 database.sqlite3*
