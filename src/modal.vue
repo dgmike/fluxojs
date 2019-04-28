@@ -94,15 +94,32 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  margin: 30px auto;
+  margin: 20px 0 0;
   padding: 0;
-  max-width: 600px;
+  padding-bottom: 2.5rem;
+  min-width: 320px;
   border-radius: 3px;
   overflow: hidden;
 
   background-color: #fff;
   box-shadow: 0 0 20px 10px rgba(0, 0, 0, .6);
+  transition: margin .5s;
+}
+
+@media (min-width: 450px) {
+  .dialog-wrapper {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+@media (min-width: 576px) {
+  .dialog-wrapper {
+    max-width: 520px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .title {

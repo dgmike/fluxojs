@@ -7,7 +7,8 @@ import axios from 'axios';
 import MainHeader from './main-header.vue';
 import AccountTable from './account-table.vue';
 import BtnAction from './btn-action.vue';
-import DialogEntrance from './dialog-entrance.vue';
+import Modal from './modal.vue';
+import FormIntentEntrance from './form-intent-entrance.vue';
 
 new Vue({ // eslint-disable-line no-new
   el: '#page',
@@ -15,18 +16,21 @@ new Vue({ // eslint-disable-line no-new
     MainHeader,
     AccountTable,
     BtnAction,
-    DialogEntrance,
+    Modal,
+    FormIntentEntrance,
   },
   data: {
     entrances: [],
     outputs: [],
     date: null,
-    showDialogEntrance: false,
+    showModalEntrance: false,
     blured: false,
     intentEntrance: {
-      year: moment().get('year'),
-      day: 1,
-      month: moment().get('month') + 1,
+      id: '',
+      year: moment().get('year').toString(),
+      day: '1',
+      maxDay: '31',
+      month: (moment().get('month') + 1).toString(),
       estimate: undefined,
       real: undefined,
       description: '',
@@ -35,6 +39,7 @@ new Vue({ // eslint-disable-line no-new
   },
   mounted() {
     this.fetch(moment());
+    // this.openDialog('showModalEntrance');
   },
   methods: {
     fetch(date) {
@@ -72,7 +77,7 @@ new Vue({ // eslint-disable-line no-new
     },
     closeDialog() {
       const self = this;
-      Object.keys(this.$data).filter(key => key.indexOf('showDialog') !== -1).forEach((dialog) => {
+      Object.keys(this.$data).filter(key => key.indexOf('showModal') !== -1).forEach((dialog) => {
         self.$set(self.$data, dialog, false);
       });
       this.$set(this.$data, 'blured', false);
@@ -82,14 +87,37 @@ new Vue({ // eslint-disable-line no-new
       this.$set(this.$data, 'blured', true);
     },
     resetAndOpenDialog() {
-      this.$set(this.$data.intentEntrance, 'year', this.$data.date.get('year'));
-      this.$set(this.$data.intentEntrance, 'month', this.$data.date.get('month') + 1);
-      this.$set(this.$data.intentEntrance, 'day', 1);
-      this.$set(this.$data.intentEntrance, 'estimate', undefined);
-      this.$set(this.$data.intentEntrance, 'real', undefined);
-      this.$set(this.$data.intentEntrance, 'description', '');
-      this.$set(this.$data.intentEntrance, 'status', 'uncommited');
-      this.openDialog('showDialogEntrance');
+      window.moment = moment;
+      const date = this.$data.date || moment();
+
+      this.$data.intentEntrance = Object.assign({}, {
+        id: '',
+        maxDay: date.daysInMonth().toString(),
+        year: date.format('YYYY'),
+        month: date.format('MM'),
+        day: '1',
+        estimate: '',
+        real: '',
+        description: '',
+        status: 'uncommited',
+      });
+
+      this.openDialog('showModalEntrance');
+    },
+    saveEntrance(entrance) {
+      const self = this;
+      const url = '/api/entrances';
+
+      axios
+        .post(url, entrance)
+        .then(() => {
+          self.closeDialog();
+          return true;
+        })
+        .catch(() => {
+          alert('Não foi possível salvar os dados.'); // eslint-disable-line
+          return false;
+        });
     },
   },
   template: `
@@ -101,13 +129,14 @@ new Vue({ // eslint-disable-line no-new
 
       <btn-action icon="plus" @click="resetAndOpenDialog">Add</btn-action>
 
-      <div v-if="showDialogEntrance">
-        <dialog-entrance
-          title="Adicionar uma entrada"
-          @close="closeDialog"
-        >
-          <pre>{{ intentEntrance }}</pre>
-        </dialog-entrance>
+      <div v-if="showModalEntrance">
+        <modal title="Adicionar uma entrada" @close="closeDialog">
+          <FormIntentEntrance
+            v-model="intentEntrance"
+            @close="closeDialog"
+            @save="saveEntrance"
+          />
+        </modal>
       </div>
     </div>
   `,
