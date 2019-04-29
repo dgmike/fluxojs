@@ -53,6 +53,7 @@ export default {
         min="1"
         :max="value.maxDay"
         step="1"
+        required
         style="width:100%"
       />
 
@@ -67,6 +68,7 @@ export default {
         min="1"
         max="12"
         step="1"
+        required
         style="width:100%"
       />
 
@@ -81,6 +83,7 @@ export default {
         min="1000"
         max="9999"
         step="1"
+        required
         style="width:100%"
       />
     </div>
@@ -94,6 +97,7 @@ export default {
         step="any"
         max="999999999"
         min="-999999999"
+        required
         style="width:100%"
       />
 
