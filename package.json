@@ -48,7 +48,7 @@
     "mysql2": "1.6.5",
     "numeral": "2.0.6",
     "pug": "2.0.3",
-    "sequelize": "5.8.5",
+    "sequelize": "5.8.6",
     "vue": "2.6.10",
     "vue-monthly-picker": "0.2.6",
     "snyk": "^1.164.0"
