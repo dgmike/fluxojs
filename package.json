@@ -51,7 +51,7 @@
     "sequelize": "5.8.5",
     "vue": "2.6.10",
     "vue-monthly-picker": "0.2.6",
-    "snyk": "^1.161.1"
+    "snyk": "^1.164.0"
   },
   "devDependencies": {
     "@babel/core": "7.4.4",
