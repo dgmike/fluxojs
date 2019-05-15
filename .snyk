@@ -5,4 +5,4 @@ ignore: {}
 patch:
   SNYK-JS-AXIOS-174505:
     - axios:
-        patched: '2019-05-15T14:01:47.899Z'
+        patched: '2019-05-05T22:54:34.870Z'
