@@ -7,8 +7,8 @@ module.exports = {
     const sequelize = new Sequelize(env.DATABASE, {});
 
     fs.readdirSync(__dirname)
-      .filter((f) => f !== 'index.js' && f.match(/\.js$/))
-      .map((f) => f.replace(/\.js/, ''))
+      .filter(f => f !== 'index.js' && f.match(/\.js$/))
+      .map(f => f.replace(/\.js/, ''))
       .map((name) => {
         const file = path.join(__dirname, name);
         sequelize.import(file);
