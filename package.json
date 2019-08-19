@@ -37,7 +37,7 @@
     "chance": "1.0.18",
     "dotenv-safe": "6.1.0",
     "http-errors": "1.7.2",
-    "koa": "2.7.0",
+    "koa": "2.8.0",
     "koa-body": "4.1.0",
     "koa-morgan": "1.0.1",
     "koa-router": "7.4.0",
