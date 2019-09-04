@@ -51,11 +51,11 @@ new Vue({ // eslint-disable-line no-new
 
           self.date = date;
           self.entrances = response.data.entrances
-            .filter(e => e.estimate >= 0)
+            .filter((e) => e.estimate >= 0)
             .sort((a, b) => a.day - b.day);
 
           self.outputs = response.data.entrances
-            .filter(e => e.estimate < 0)
+            .filter((e) => e.estimate < 0)
             .sort((a, b) => a.day - b.day);
 
           return response;
