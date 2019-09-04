@@ -36,7 +36,7 @@
     "bcrypt": "3.0.6",
     "chance": "1.0.18",
     "dotenv-safe": "6.1.0",
-    "http-errors": "1.7.2",
+    "http-errors": "1.7.3",
     "koa": "2.7.0",
     "koa-body": "4.1.0",
     "koa-morgan": "1.0.1",
