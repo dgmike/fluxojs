@@ -88,21 +88,21 @@ module.exports = {
   computed: {
     totals() {
       const estimateEntrances = this.$props.entrances
-        .map(e => e.estimate || 0)
+        .map((e) => e.estimate || 0)
         .reduce((a, b) => { const c = b + a; return c; }, 0);
 
       const estimateOutputs = this.$props.outputs
-        .map(e => e.estimate || 0)
+        .map((e) => e.estimate || 0)
         .reduce((a, b) => { const c = b + a; return c; }, 0);
 
       const estimateValue = estimateEntrances + estimateOutputs;
 
       const realEntrances = this.$props.entrances
-        .map(e => e.real || 0)
+        .map((e) => e.real || 0)
         .reduce((a, b) => { const c = b + a; return c; }, 0);
 
       const realOutputs = this.$props.outputs
-        .map(e => e.real || 0)
+        .map((e) => e.real || 0)
         .reduce((a, b) => { const c = b + a; return c; }, 0);
 
       const realValue = realEntrances + realOutputs;
