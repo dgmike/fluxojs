@@ -74,7 +74,7 @@
     "mocha": "6.2.0",
     "nyc": "14.1.1",
     "sinon": "7.4.2",
-    "sqlite3": "^4.1.0",
+    "sqlite3": "4.1.0",
     "supertest": "4.0.2",
     "vue-eslint-parser": "6.0.4",
     "vue-loader": "15.7.1",
