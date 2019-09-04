@@ -9,7 +9,7 @@ const morgan = require('koa-morgan');
 const models = require('./models');
 const errorHandler = require('./lib/errorHandler');
 
-const env = dotEnvSafe.load().required;
+const env = dotEnvSafe.config().required;
 
 const app = new Koa();
 
