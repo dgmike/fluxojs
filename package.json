@@ -34,7 +34,7 @@
     "axios": "0.19.0",
     "babel-eslint": "10.0.3",
     "bcrypt": "3.0.6",
-    "chance": "1.1.0",
+    "chance": "1.1.2",
     "dotenv-safe": "8.1.0",
     "http-errors": "1.7.3",
     "koa": "2.8.1",
