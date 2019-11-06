@@ -70,7 +70,7 @@
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-react": "7.14.3",
-    "eslint-plugin-vue": "5.2.3",
+    "eslint-plugin-vue": "6.0.0",
     "mocha": "6.2.0",
     "nyc": "14.1.1",
     "sinon": "7.4.2",
