@@ -78,7 +78,7 @@
     "supertest": "4.0.2",
     "vue-eslint-parser": "6.0.4",
     "vue-loader": "15.7.1",
-    "vue-template-compiler": "2.6.10",
+    "vue-template-compiler": "2.6.11",
     "webpack": "4.40.2",
     "webpack-cli": "3.3.9"
   },
