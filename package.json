@@ -50,7 +50,7 @@
     "pug": "2.0.4",
     "sequelize": "6.0.0",
     "snyk": "1.228.2",
-    "vue": "2.6.10",
+    "vue": "2.6.11",
     "vue-monthly-picker": "0.2.8"
   },
   "devDependencies": {
