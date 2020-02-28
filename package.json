@@ -32,7 +32,7 @@
   "homepage": "https://github.com/dgmike/fluxojs#readme",
   "dependencies": {
     "axios": "0.19.0",
-    "babel-eslint": "10.0.3",
+    "babel-eslint": "10.1.0",
     "bcrypt": "3.0.6",
     "chance": "1.1.0",
     "dotenv-safe": "8.1.0",
