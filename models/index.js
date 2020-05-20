@@ -4,14 +4,15 @@ const path = require('path');
 
 module.exports = {
   configure(env) {
-    const sequelize = new Sequelize(env.DATABASE, {});
+    const sequelize = new Sequelize.Sequelize(env.DATABASE, {});
 
     fs.readdirSync(__dirname)
       .filter((f) => f !== 'index.js' && f.match(/\.js$/))
       .map((f) => f.replace(/\.js/, ''))
       .map((name) => {
         const file = path.join(__dirname, name);
-        sequelize.import(file);
+        const modelCreator = require(file);
+        modelCreator(sequelize, Sequelize.DataTypes)
 
         return name;
       })
