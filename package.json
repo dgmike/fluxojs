@@ -71,7 +71,7 @@
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-react": "7.20.0",
     "eslint-plugin-vue": "6.2.2",
-    "mocha": "7.1.2",
+    "mocha": "7.2.0",
     "nyc": "15.0.1",
     "sinon": "9.0.2",
     "sqlite3": "4.2.0",
