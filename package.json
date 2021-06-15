@@ -61,7 +61,7 @@
     "babel-plugin-transform-vue-jsx": "3.7.0",
     "babel-preset-env": "1.7.0",
     "codacy-coverage": "3.4.0",
-    "css-loader": "3.5.3",
+    "css-loader": "5.0.0",
     "eslint": "7.0.0",
     "eslint-config-airbnb": "18.1.0",
     "eslint-config-airbnb-base": "14.1.0",
