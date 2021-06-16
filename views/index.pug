@@ -13,10 +13,10 @@ html
     form(method='post' action='/login')
       label
         span E-mail
-        input(type='email' name='email' required=true value=email || '')
+        input(type='email' name='email' required=true autocomplete="username email" autofocus=true value=email || '')
 
       label
         span Senha
-        input(type='password' name='password' required=true)
+        input(type='password' name='password' autocomplete="current-password" required=true)
 
       button(type='submit') Entrar

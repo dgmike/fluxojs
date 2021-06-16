@@ -1,0 +1,5 @@
+/static/js/dashboard.js
+/node_modules
+/.env
+/.nyc_output
+database.sqlite3*

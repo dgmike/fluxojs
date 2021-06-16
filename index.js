@@ -5,12 +5,14 @@ const koaStatic = require('koa-static');
 const koaBody = require('koa-body');
 const session = require('koa-session');
 const dotEnvSafe = require('dotenv-safe');
-
-const env = dotEnvSafe.load().required;
-
+const morgan = require('koa-morgan');
 const models = require('./models');
+const errorHandler = require('./lib/errorHandler');
+
+const env = dotEnvSafe.config().required;
 
 const app = new Koa();
+
 const router = new Router();
 
 app.keys = (env.SECRET_KEYS || 'some secret key').split(',');
@@ -35,8 +37,9 @@ app.use(koaBody());
 app.use(views(`${__dirname}/views`, { extension: 'pug' }));
 app.use(koaStatic(`${__dirname}/static`));
 app.use(session(SESSION_CONFIG, app));
+app.use(morgan('combined'));
 
-app.context.models = models;
+app.context.models = models.configure(env).models;
 
 router.get('root', '/', async (ctx) => {
   if (ctx.session.logged) {
@@ -44,6 +47,10 @@ router.get('root', '/', async (ctx) => {
     return;
   }
   await ctx.render('index');
+});
+
+router.get('/login', async (ctx) => {
+  ctx.redirect(router.url('root'));
 });
 
 router.post('/login', async (ctx) => {
@@ -79,6 +86,124 @@ router.get('dashboard', '/dashboard', async (ctx) => {
 router.get('logout', '/logout', async (ctx) => {
   ctx.session = null;
   ctx.redirect(router.url('root'));
+});
+
+/**
+ * API
+ */
+
+const middlewareIsLogged = (ctx, next) => {
+  if (!ctx.session.logged) {
+    return ctx.throw(401);
+  }
+
+  return next();
+};
+
+const errorFieldCheck = (opts) => {
+  if (!(opts.value || '').match(opts.regex)) {
+    return errorHandler.json(
+      opts.ctx,
+      [
+        {
+          path: `/${opts.field}`,
+          message: `${opts.field} field is empty or invalid`,
+        },
+      ],
+    );
+  }
+
+  return false;
+};
+
+const validateMonthYear = (ctx, next) => {
+  const { year, month } = ctx.query;
+
+  let error;
+
+  error = errorFieldCheck({
+    ctx,
+    field: 'year',
+    value: year,
+    regex: /^[1-9]\d{3}$/,
+  });
+
+  if (error) {
+    return error;
+  }
+
+  error = errorFieldCheck({
+    ctx,
+    field: 'month',
+    value: month,
+    regex: /^(\0?\d|1[012])$/,
+  });
+
+  if (error) {
+    return error;
+  }
+
+  return next();
+};
+
+router.get('api.entrances.fetch', '/api/entrances', middlewareIsLogged, validateMonthYear, async (ctx) => {
+  const { year, month } = ctx.query;
+
+  const entrances = await ctx.models.entrance.findAll({
+    attributes: ['id', 'year', 'month', 'day', 'description', 'real', 'estimate', 'status'],
+    where: {
+      year,
+      month,
+      '$user.email$': ctx.session.email,
+    },
+    include: [
+      {
+        model: ctx.models.user,
+        attributes: [],
+      },
+    ],
+  });
+
+  ctx.body = { entrances };
+  return ctx;
+});
+
+router.post('api.entrances.create', '/api/entrances', middlewareIsLogged, async (ctx) => {
+  let entrance;
+
+  const {
+    year,
+    month,
+    day,
+    description,
+    estimate,
+    real,
+    status,
+  } = ctx.request.body;
+
+  try {
+    const user = await ctx.models.user.findOne({ where: { email: ctx.session.email } });
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    entrance = await ctx.models.entrance.create({
+      year,
+      month,
+      day,
+      description,
+      estimate,
+      real,
+      status,
+      userId: user.id,
+    });
+
+    ctx.body = { entrance };
+    return ctx;
+  } catch (err) {
+    return ctx.throw(422, err.toString());
+  }
 });
 
 app
