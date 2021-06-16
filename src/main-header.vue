@@ -1,3 +1,83 @@
+<template>
+  <header>
+    <h1>FluxoJs</h1>
+    <nav v-if="date">
+      <a
+        href="#"
+        @click.prevent="prevMonth"
+      >&larr;</a>
+      <vue-monthly-picker
+        :value="date"
+        :month-labels="locale"
+        input-class="label"
+        date-format="MMM/YYYY"
+        @selected="dateSelected"
+      />
+      <a
+        href="#"
+        @click.prevent="nextMonth"
+      >&rarr;</a>
+    </nav>
+    <nav
+      v-else
+      class="loading"
+    >
+      Carregando...
+    </nav>
+    <nav>
+      <!-- <a href="#">Clonar</a> -->
+      <!-- <a href="#">Configurar</a> -->
+      <a href="/logout">Sair</a>
+    </nav>
+  </header>
+</template>
+
+<script>
+import VueMonthlyPicker from 'vue-monthly-picker';
+import 'moment/locale/pt-br';
+import moment from 'moment';
+
+// const moment = require('moment');
+
+moment.locale('pt-BR');
+
+window.m = moment;
+
+module.exports = {
+  components: {
+    VueMonthlyPicker,
+  },
+  props: {
+    date: {
+      type: moment,
+    },
+  },
+  computed: {
+    month() {
+      return this.date && this.date.format('MMMM/YYYY');
+    },
+  },
+  data() {
+    return {
+      locale: moment.monthsShort(),
+    };
+  },
+  methods: {
+    prevMonth() {
+      const newDate = this.date.clone().subtract(1, 'month');
+      this.$emit('update-month', newDate);
+    },
+    nextMonth() {
+      const newDate = this.date.clone().add(1, 'month');
+      this.$emit('update-month', newDate);
+    },
+    dateSelected(date) {
+      this.$emit('update-month', date);
+    },
+  },
+};
+</script>
+
 <style scoped>
 header {
     position: fixed;
@@ -88,83 +168,3 @@ header .date-popover.visible {
   top: calc(100% + 1rem);
 }
 </style>
-
-<template>
-  <header>
-    <h1>FluxoJs</h1>
-    <nav v-if="date">
-      <a
-        href="#"
-        @click.prevent="prevMonth"
-      >&larr;</a>
-      <vue-monthly-picker
-        :value="date"
-        :month-labels="locale"
-        input-class="label"
-        date-format="MMM/YYYY"
-        @selected="dateSelected"
-      />
-      <a
-        href="#"
-        @click.prevent="nextMonth"
-      >&rarr;</a>
-    </nav>
-    <nav
-      v-else
-      class="loading"
-    >
-      Carregando...
-    </nav>
-    <nav>
-      <!-- <a href="#">Clonar</a> -->
-      <!-- <a href="#">Configurar</a> -->
-      <a href="/logout">Sair</a>
-    </nav>
-  </header>
-</template>
-
-<script>
-import VueMonthlyPicker from 'vue-monthly-picker';
-import 'moment/locale/pt-br';
-import moment from 'moment';
-
-// const moment = require('moment');
-
-moment.locale('pt-BR');
-
-window.m = moment;
-
-module.exports = {
-  components: {
-    VueMonthlyPicker,
-  },
-  props: {
-    date: {
-      type: moment,
-    },
-  },
-  computed: {
-    month() {
-      return this.date && this.date.format('MMMM/YYYY');
-    },
-  },
-  data() {
-    return {
-      locale: moment.monthsShort(),
-    };
-  },
-  methods: {
-    prevMonth() {
-      const newDate = this.date.clone().subtract(1, 'month');
-      this.$emit('update-month', newDate);
-    },
-    nextMonth() {
-      const newDate = this.date.clone().add(1, 'month');
-      this.$emit('update-month', newDate);
-    },
-    dateSelected(date) {
-      this.$emit('update-month', date);
-    },
-  },
-};
-</script>

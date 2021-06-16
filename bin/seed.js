@@ -3,7 +3,7 @@ const moment = require('moment');
 const Chance = require('chance');
 const models = require('../models');
 
-const env = dotEnvSafe.load().required;
+const env = dotEnvSafe.config().required;
 
 const sequelize = models.configure(env);
 

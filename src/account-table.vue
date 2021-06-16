@@ -47,12 +47,6 @@
   </table>
 </template>
 
-<style scoped>
-.negative {
-  color: #ff8888;
-}
-</style>
-
 <script>
 import numeral from 'numeral';
 import AccountLines from './account-lines.vue';
@@ -120,3 +114,9 @@ module.exports = {
   },
 };
 </script>
+
+<style scoped>
+.negative {
+  color: #ff8888;
+}
+</style>
