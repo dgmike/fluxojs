@@ -1,16 +1,5 @@
 <template>
   <div class="dialog" />
-  <!-- pre>
-    {
-      year: {{ year }},
-      day: {{ day }},
-      month: {{ month }},
-      estimate: {{ estimate }},
-      real: {{ real }},
-      description: {{ description }},
-      status: {{ status }},
-    }
-  </pre -->
 </template>
 
 <script>

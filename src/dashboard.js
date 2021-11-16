@@ -69,10 +69,9 @@ new Vue({ // eslint-disable-line no-new
       this.fetch(date);
     },
     openDialog() {
-      // console.info('open dialog');
+      //
     },
     resetAndOpenDialog() {
-      // console.info('reset dialog');
       this.$set(this.$data.intentEntrance, 'year', this.$data.date.get('year'));
       this.$set(this.$data.intentEntrance, 'month', this.$data.date.get('month') + 1);
       this.$set(this.$data.intentEntrance, 'day', 1);

@@ -1,7 +1,10 @@
 <template>
   <header>
     <h1>FluxoJs</h1>
-    <nav v-if="date">
+    <nav
+      v-if="date"
+      aria-label="Seletor de meses"
+    >
       <a
         href="#"
         @click.prevent="prevMonth"
@@ -11,8 +14,8 @@
         :month-labels="locale"
         input-class="label"
         date-format="MMM/YYYY"
+        :clear-option="false"
         @selected="dateSelected"
-        :clearOption="false"
       />
       <a
         href="#"
@@ -22,12 +25,11 @@
     <nav
       v-else
       class="loading"
+      aria-label="Loading"
     >
       Carregando...
     </nav>
-    <nav>
-      <!-- <a href="#">Clonar</a> -->
-      <!-- <a href="#">Configurar</a> -->
+    <nav aria-label="Principal">
       <a href="/logout">Sair</a>
     </nav>
   </header>
@@ -38,30 +40,29 @@ import VueMonthlyPicker from 'vue-monthly-picker';
 import 'moment/locale/pt-br';
 import moment from 'moment';
 
-// const moment = require('moment');
-
 moment.locale('pt-BR');
 
 window.m = moment;
 
-module.exports = {
+export default {
   components: {
     VueMonthlyPicker,
   },
   props: {
     date: {
+      default: moment(),
       type: moment,
-    },
-  },
-  computed: {
-    month() {
-      return this.date && this.date.format('MMMM/YYYY');
     },
   },
   data() {
     return {
       locale: moment.monthsShort(),
     };
+  },
+  computed: {
+    month() {
+      return this.date && this.date.format('MMMM/YYYY');
+    },
   },
   methods: {
     prevMonth() {

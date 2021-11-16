@@ -31,28 +31,33 @@
 </template>
 
 <script>
-// const numeral = require('numeral');
 import numeral from 'numeral';
+import moment from 'moment';
 
 require('numeral/locales/pt-br');
 
 numeral.locale('pt-br');
 
-module.exports = {
+export default {
   props: {
     day: {
+      default: moment().get('day'),
       type: Number,
     },
     description: {
+      default: '',
       type: String,
     },
     estimate: {
+      default: null,
       type: Number,
     },
     real: {
+      default: null,
       type: Number,
     },
     status: {
+      default: 'uncommited',
       type: String,
     },
   },

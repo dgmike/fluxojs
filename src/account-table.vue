@@ -1,25 +1,49 @@
 <template>
-  <table>
+  <table aria-label="Dados de fluxo de entradas e saidas">
     <thead>
-      <th>Dia</th>
-      <th>Descrição</th>
-      <th>Estimativa</th>
-      <th>Valor Real</th>
-      <th>Estado</th>
-      <th>Ações</th>
+      <th scope="col">
+        Dia
+      </th>
+      <th scope="col">
+        Descrição
+      </th>
+      <th scope="col">
+        Estimativa
+      </th>
+      <th scope="col">
+        Valor Real
+      </th>
+      <th scope="col">
+        Estado
+      </th>
+      <th scope="col">
+        Ações
+      </th>
     </thead>
     <tfoot>
       <tr>
-        <th colspan="2">
+        <th
+          colspan="2"
+          scope="row"
+        >
           Total
         </th>
-        <th :class="{ negative: totals.estimateValue < 0 }">
+        <th
+          id="row-total-estimate"
+          :class="{ negative: totals.estimateValue < 0 }"
+        >
           {{ totals.estimate }}
         </th>
-        <th :class="{ negative: totals.realValue < 0 }">
+        <th
+          id="row-total-real"
+          :class="{ negative: totals.realValue < 0 }"
+        >
           {{ totals.real }}
         </th>
-        <th colspan="3" />
+        <th
+          id="row-total-extra-spaces"
+          colspan="3"
+        />
       </tr>
     </tfoot>
     <account-lines title="Entradas">
@@ -52,13 +76,11 @@ import numeral from 'numeral';
 import AccountLines from './account-lines.vue';
 import AccountLine from './account-line.vue';
 
-// const numeral = require('numeral');
 require('numeral/locales/pt-br');
-// import 'numeral/locales/pt-br';
 
 numeral.locale('pt-br');
 
-module.exports = {
+export default {
   components: {
     AccountLines,
     AccountLine,
@@ -83,21 +105,21 @@ module.exports = {
     totals() {
       const estimateEntrances = this.$props.entrances
         .map((e) => e.estimate || 0)
-        .reduce((a, b) => { const c = b + a; return c; }, 0);
+        .reduce((a, b) => b + a, 0);
 
       const estimateOutputs = this.$props.outputs
         .map((e) => e.estimate || 0)
-        .reduce((a, b) => { const c = b + a; return c; }, 0);
+        .reduce((a, b) => b + a, 0);
 
       const estimateValue = estimateEntrances + estimateOutputs;
 
       const realEntrances = this.$props.entrances
         .map((e) => e.real || 0)
-        .reduce((a, b) => { const c = b + a; return c; }, 0);
+        .reduce((a, b) => b + a, 0);
 
       const realOutputs = this.$props.outputs
         .map((e) => e.real || 0)
-        .reduce((a, b) => { const c = b + a; return c; }, 0);
+        .reduce((a, b) => b + a, 0);
 
       const realValue = realEntrances + realOutputs;
 

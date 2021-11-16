@@ -4,6 +4,7 @@
       <th
         class="subhead"
         colspan="6"
+        scope="row"
       >
         {{ title }}
       </th>
