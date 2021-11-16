@@ -11,19 +11,19 @@ module.exports = {
       .map((f) => f.replace(/\.js/, ''));
 
     models.forEach((name) => {
-        const file = path.join(__dirname, name);
-        // eslint-disable-next-line import/no-dynamic-require, global-require
-        const modelCreator = require(file);
-        modelCreator(sequelize, Sequelize.DataTypes);
-      });
+      const file = path.join(__dirname, name);
+      // eslint-disable-next-line import/no-dynamic-require, global-require
+      const modelCreator = require(file);
+      modelCreator(sequelize, Sequelize.DataTypes);
+    });
 
     models.forEach((name) => {
-        const model = sequelize.model(name);
+      const model = sequelize.model(name);
 
-        if (Object.hasOwnProperty.call(model, 'associate')) {
-          model.associate(sequelize);
-        }
-      });
+      if (Object.hasOwnProperty.call(model, 'associate')) {
+        model.associate(sequelize);
+      }
+    });
 
     return sequelize;
   },
