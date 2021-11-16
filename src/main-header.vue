@@ -12,6 +12,7 @@
         input-class="label"
         date-format="MMM/YYYY"
         @selected="dateSelected"
+        :clearOption="false"
       />
       <a
         href="#"
