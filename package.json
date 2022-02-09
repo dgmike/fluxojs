@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha",
+    "test": "snyk test && mocha",
     "eslint": "eslint --ext '.js,.vue' .",
     "eslint:fix": "eslint --ext '.js,.vue' --fix .",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | codacy-coverage",
@@ -31,8 +31,8 @@
   },
   "homepage": "https://github.com/dgmike/fluxojs#readme",
   "dependencies": {
-    "axios": "0.24.0",
-    "bcrypt": "5.0.1",
+    "axios": "^0.24.0",
+    "bcrypt": "^5.0.1",
     "chance": "1.1.8",
     "dotenv-safe": "8.2.0",
     "http-errors": "1.8.1",
@@ -48,7 +48,7 @@
     "numeral": "2.0.6",
     "pug": "3.0.2",
     "sequelize": "6.9.0",
-    "snyk": "1.763.0",
+    "snyk": "^1.763.0",
     "vue": "2.6.14",
     "vue-monthly-picker": "0.2.8"
   },
