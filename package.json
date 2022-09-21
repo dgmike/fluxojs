@@ -20,6 +20,9 @@
   },
   "scripts": {
     "start": "node .",
-    "test": "node --test ."
+    "test": "snyk test && node --test ."
+  },
+  "devDependencies": {
+    "snyk": "^1.1009.0"
   }
 }
