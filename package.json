@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "private": true,
-  "keywords": ["finances"],
+  "keywords": [
+    "finances"
+  ],
   "author": "Michael Granados <contato@dgmike.com.br>",
   "license": "ISC",
   "homepage": "https://github.com/dgmike/fluxojs#readme",
@@ -15,5 +17,9 @@
   },
   "bugs": {
     "url": "https://github.com/dgmike/fluxojs/issues"
+  },
+  "scripts": {
+    "start": "node .",
+    "test": "node --test ."
   }
 }
