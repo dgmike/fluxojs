@@ -23,6 +23,6 @@
     "test": "snyk test && node --test ."
   },
   "devDependencies": {
-    "snyk": "^1.1009.0"
+    "snyk": "^1.1064.0"
   }
 }
